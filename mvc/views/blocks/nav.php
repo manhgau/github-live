@@ -62,12 +62,12 @@
                         </div>
                     </div>
                     <?php
-                        $cart= $_SESSION["cart"];
+                        $cart = $_SESSION["cart"]??[];
                         $number = 0;
-                        if(isset($_SESSION["cart"])){
-                        foreach($cart  as $value){
-                            $number += (int)$value["number"];
-                        }};
+                        if(is_array($cart) && count($cart) > 0){
+                            foreach($cart  as $value){
+                                $number += (int)$value["number"];
+                            }};
                     ?>
                     <div class="cart">
                         <a class="form-link" href="<?php echo build_layout_url("home/cart"); ?>">

@@ -13,7 +13,12 @@
 
 </head>
 <body>   
-    <?php session_start(); ?> 
+    <?php 
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    ?> 
     <?php require_once "./mvc/views/blocks/nav.php" ?>	
     <?php echo $page_content ?>
 	<?php require_once "./mvc/views/blocks/footer.php" ?>   

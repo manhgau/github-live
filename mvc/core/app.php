@@ -6,8 +6,8 @@ class app {
     function __construct () {
         $arr = $this->UrlProcess();
         // xử lý controller
-        // file_exists kiểm tra file có tồn tại
-        if(file_exists("./mvc/controllers/".$arr[0].".php")) {
+        // file_exists kiểm tra file có tồn tại    
+        if(isset($arr[0]) && file_exists("./mvc/controllers/".$arr[0].".php")) {
             $this->controller = $arr[0];
             $this->controllerId = $arr[0];
             unset($arr[0]);
