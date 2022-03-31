@@ -122,7 +122,7 @@
                         <span class="price"><?php echo number_format($cat['price'], 0, ',', ' '); ?> ₫</span>
                         <span class="price-old"><?php echo number_format($cat['price_old'], 0, ',', ' '); ?> ₫</span>
                     </div>
-                    <button class="btn btn-purchase" type="submit">
+                    <button class="btn btn-purchase" type="submit" onclick="addCart('<?php echo $cat['id']; ?>')">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-note">THÊM VÀO GIỎ</span>
                     </button>

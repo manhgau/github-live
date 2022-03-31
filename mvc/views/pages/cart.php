@@ -1,7 +1,7 @@
 <style>
 .table-wrap{
    padding-top: 200px; 
-   width: 70%;
+   width: 100%;
 }
 .table{
     width: 100%;
@@ -9,19 +9,19 @@
     border-spacing: 0;
 }
 .thead-dark{
-    background:#03a9f4;
+    background:#24aeb1;
     color: #fff;
 }
 .table th {
     padding: 10px 0;
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 .table td{
     padding: 10px 10px 0 10px;
     text-align: center;
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
+    /* border-right: 1px solid #999; */
+    border-bottom: 1px solid #999;
     
 }
 .btn-wrap{
@@ -69,6 +69,17 @@
     color: #fff;
 
 }
+.cart-number{
+    width: 75px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #999;
+    outline: none;
+}
+.font-number{
+    font-size: 14px;
+    color: #24aeb1;
+}
 
 </style>
 <div class="gird">
@@ -76,45 +87,37 @@
 <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th>STT</th>
                         <th>Ảnh sản phẩm</th>                       
                         <th>Tên sản phẩm</th>
                         <th>Số lượng mua</th>
                         <th>Số lượng còn lại</th>
+                        <th>Đơn giá</th>
                         <th>Thành tiền</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-            <?php            
-            if(isset($products) && is_array($products) && count($products) > 0){
-                foreach($products as $cat){  
+            <?php   
+            $cart = $_SESSION["cart"]??[];         
+            if(isset($cart) && is_array($cart) && count($cart) > 0){
+                foreach($cart as $cat){  
+                    $quantity = $cat['quantity'] - $cat['number'];
+                    $money_paid = $cat['price'] * $cat['number'];
                       ?>
-                            <tr>
-                                <td><?php echo ($offset + $i); $i++; ?></td>
-                                <td>
-                                    <img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="">
-                                </td>
-                                <td><?php echo $cat['prd_name']; ?></td>
-                                <td><?php echo $cat['price']; ?></td>
-                                <td><?php echo $cat['quantity']; ?></td>
-                                <td><?php echo $cat['description']; ?></td>
-                                <td><?php echo $cat['sold']; ?></td>
-                                <td><?php echo $cat['category_name']; ?></td>
-                                <td>
-                                    <?php
-                                    if($cat['hot'] == 1){
-                                       echo "HOT"; 
-                                    }else{
-                                        echo "NO HOT";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                <a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="delete" href="<?php echo build_layout_url("productadmin/xoa")."&id=".$cat['id']."";?>">Xóa</a>
-                                </td>
-                            </tr>                            
+                    <tr>
+                        <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
+                        <td><?php echo $cat['prd_name']; ?></td>
+                        <td>
+                            <input class="cart-number" type="number" value="<?php echo $cat['number']; ?>">
+                        </td>
+                        <td>
+                        <input class="cart-number" type="text" value="<?php echo $quantity; ?>">
+                        </td>
+                        <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
+                        <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
+                        <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href=""><i class="far fa-trash-alt"></i></a></td>
+                    </tr>                            
                             <?php }  
             }
                             ?>

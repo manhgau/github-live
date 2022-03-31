@@ -134,9 +134,15 @@ class home extends controller{
         ]);
     }
     public function cart (){
-        
+         //TIN TỨC
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories(); 
         $this->view("cart",[
-
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
         ]);
     }
     public function add_to_cart(){
@@ -146,43 +152,35 @@ class home extends controller{
         foreach($product_shopping as $cat){
         if(!isset($_SESSION["cart"])){
             $cart[$prod_id] = array(
-                'img' =>$cat[0],
-                'prd_name' =>$cat[1],
-                'price' =>$cat[2],
-                'quantity' =>$cat[3],
+                'img' =>$cat[1],
+                'prd_name' =>$cat[2],
+                'price' =>$cat[3],
+                'quantity' =>$cat[5],
                 'number' =>1
             );
         }else{
             $cart = $_SESSION["cart"];
             if (array_key_exists($prod_id, $cart)){
                 $cart[$prod_id] = array(
-                    'img' =>$cat[0],
-                    'prd_name' =>$cat[1],
-                    'price' =>$cat[2],
-                    'quantity' =>$cat[3],
+                    'img' =>$cat[1],
+                    'prd_name' =>$cat[2],
+                    'price' =>$cat[3],
+                    'quantity' =>$cat[5],
                     'number' =>(int)$cart[$prod_id]["number"] +1
                 );
             }else{
                 $cart[$prod_id] = array(
-                    'img' =>$cat[0],
-                    'prd_name' =>$cat[1],
-                    'price' =>$cat[2],
-                    'quantity' =>$cat[3],
+                    'img' =>$cat[1],
+                    'prd_name' =>$cat[2],
+                    'price' =>$cat[3],
+                    'quantity' =>$cat[5],
                     'number' =>1
                 );
             }
         }  
     }  
     $_SESSION["cart"] = $cart;
-    $number = 0;
-    foreach($cart  as $value){
-        $number += (int)$value["number"];
-    };
-    echo $number;
-    // echo "<prE>";
-    // print_r($_SESSION["cart"]);     
     }
-
 
 
 }

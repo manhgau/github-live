@@ -19,13 +19,13 @@
                                 <h4 class="container-product-heading"><?php echo $cat['prd_name']; ?></h4>
                                 <span class="price"><?php echo number_format($cat['price'], 0, ',', ' '); ?> ₫</span>
                                 <span class="price-old"><?php echo number_format($cat['price_old'], 0, ',', ' '); ?> ₫</span>
-                                <div class="cart-product">
+                                <button class="cart-product" onclick="addCart('<?php echo $cat['id']; ?>')" >
                                     <i class="fas fa-shopping-cart"></i>
                                     <a class="form-link" href="">
                                         <span class="cart-note">THÊM VÀO GIỎ</span>
 
                                     </a>
-                                </div>
+                                </button>
                             </div>
                     
                  </div>

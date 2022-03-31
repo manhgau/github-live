@@ -85,13 +85,19 @@
 
                           <?php  }else{ ?>
                             <!-- có sản phẩm ở giỏ hàng -->
+                    <h4 class="header-cart--pro">Sản phẩm mới thêm</h4>
+                    <?php   
+                    $cart = $_SESSION["cart"]??[];         
+                    if(isset($cart) && is_array($cart) && count($cart) > 0){
+                        foreach($cart as $cat){  ?>
+                    <a class="form-link" href="<?php echo build_layout_url("home/cart"); ?>">
                             <div class="cart-notify--pro">
                                 <div class="cart-pro-item">
                                     <div class="cart-pro-item--img">
-                                    <img class="cart-img" src="<?php echo DOMAIN;?>/public/img/fd8f5d3618960cc47a3e39f7b5e8d868.jpg" alt="" >
+                                    <img class="cart-img" style="<img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="" >
                                     </div>
                                     <div class="cart-pro-item--name">
-                                     <span class="pro-name">Sản phẩm 1</span> 
+                                     <span class="pro-name"><?php echo $cat['prd_name']; ?></span> 
                                      <!-- <div class="pro-category-wrap">
                                          <label for="">Thể loại:</label>
                                          <span class="pro-category">Thực phẩm chức năng</span>
@@ -102,18 +108,21 @@
                                      </div> -->
                                     </div>
                                     <div class="cart-pro-item--price">
-                                        <span>789 000</span>
+                                        <span><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</span>
                                     </div>
-                                </div>
-                                <div class="total">
-                                    <label for="">Tổng tiền:</label>
-                                    <span>900 000</span>
                                 </div>
 
                             </div>
+                    </a>
 
                           <?php }
+            }
+        }
                             ?>
+                            <div class="footer-cart">
+                                <span class="footer-number"><?php echo $number;?> sản phẩm đã được thêm</span>
+                                <a class="footer-link" href="<?php echo build_layout_url("home/cart"); ?>">Xem giỏ hàng</a>
+                            </div>
                          </div>
                     </div>
                     <div class="category-login mobile">
