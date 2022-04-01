@@ -152,34 +152,55 @@ class home extends controller{
         foreach($product_shopping as $cat){
         if(!isset($_SESSION["cart"])){
             $cart[$prod_id] = array(
+                'id'  => $cat[0],
                 'img' =>$cat[1],
                 'prd_name' =>$cat[2],
                 'price' =>$cat[3],
-                'quantity' =>$cat[5],
-                'number' =>1
+                'number' =>1,
             );
         }else{
             $cart = $_SESSION["cart"];
             if (array_key_exists($prod_id, $cart)){
                 $cart[$prod_id] = array(
+                    'id'  => $cat[0],
                     'img' =>$cat[1],
                     'prd_name' =>$cat[2],
                     'price' =>$cat[3],
-                    'quantity' =>$cat[5],
                     'number' =>(int)$cart[$prod_id]["number"] +1
                 );
             }else{
                 $cart[$prod_id] = array(
+                    'id'  => $cat[0],
                     'img' =>$cat[1],
                     'prd_name' =>$cat[2],
                     'price' =>$cat[3],
-                    'quantity' =>$cat[5],
                     'number' =>1
                 );
             }
         }  
     }  
     $_SESSION["cart"] = $cart;
+    }
+    public function payment (){
+        //TIN TỨC
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories(); 
+        $this->view("payment",[
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
+        ]);
+    }
+    public function delete_pro (){
+        if (isset($_POST)){
+            //Xóa session
+            if(isset($_SESSION['cart'])){
+                unset($_SESSION['$cart']);            
+            }  
+        }
+        redirect(build_layout_url("home/cart"));
     }
 
 

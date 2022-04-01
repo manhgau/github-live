@@ -80,6 +80,29 @@
     font-size: 14px;
     color: #24aeb1;
 }
+.payment{
+    padding: 30px 15px;
+    box-shadow: 0 7px 64px rgb(0 0 0 / 7%);
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.money-payment{
+    font-size: 25px;
+}
+.payment-number{
+    color: #ff5722;
+}
+.link-payment{
+    padding: 10px;
+    background: #ff9800;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+}
+.link-payment:hover{
+    opacity: 0.6;
+}
 
 </style>
 <div class="gird">
@@ -90,7 +113,6 @@
                         <th>Ảnh sản phẩm</th>                       
                         <th>Tên sản phẩm</th>
                         <th>Số lượng mua</th>
-                        <th>Số lượng còn lại</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
                         <th>Action</th>
@@ -102,8 +124,8 @@
             $cart = $_SESSION["cart"]??[];         
             if(isset($cart) && is_array($cart) && count($cart) > 0){
                 foreach($cart as $cat){  
-                    $quantity = $cat['quantity'] - $cat['number'];
                     $money_paid = $cat['price'] * $cat['number'];
+                    $total += (int)$value["money_paid"];
                       ?>
                     <tr>
                         <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
@@ -111,12 +133,9 @@
                         <td>
                             <input class="cart-number" type="number" value="<?php echo $cat['number']; ?>">
                         </td>
-                        <td>
-                        <input class="cart-number" type="text" value="<?php echo $quantity; ?>">
-                        </td>
                         <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
                         <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
-                        <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href=""><i class="far fa-trash-alt"></i></a></td>
+                        <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href="<?php echo build_layout_url("home/delete_pro")."&id=".$cat['id']."";; ?>"><i class="far fa-trash-alt"></i></a></td>
                     </tr>                            
                             <?php }  
             }
@@ -128,5 +147,12 @@
             return confirm ("Bạn có chắc chắn muốn xóa sản phẩm: "+ name + "?");
     }
     </script>
+</div>
+<div class="payment">
+    <div class="money-payment">
+        <label class = "label">Tổng tiền:</label>
+        <span class = "payment-number"><?php echo number_format($total, 0, ',', ' '); ?>₫</span>
+    </div>
+     <a class ="link-payment" href="<?php echo build_layout_url("home/payment"); ?>">Thanh toán</a>
 </div>
 </div>

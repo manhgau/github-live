@@ -1,0 +1,1 @@
+<?php require_once "./mvc/views/pages/payment.php" ?>

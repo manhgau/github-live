@@ -90,7 +90,7 @@
                     $cart = $_SESSION["cart"]??[];         
                     if(isset($cart) && is_array($cart) && count($cart) > 0){
                         foreach($cart as $cat){  ?>
-                    <a class="form-link" href="<?php echo build_layout_url("home/cart"); ?>">
+                    <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
                             <div class="cart-notify--pro">
                                 <div class="cart-pro-item">
                                     <div class="cart-pro-item--img">
