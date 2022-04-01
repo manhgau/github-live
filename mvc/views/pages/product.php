@@ -162,6 +162,14 @@
             </div>
             <div class="product-involve">
             <h4 class="involve-header">Các sản phẩm liên quan:</h4>
-                
+                <div class="pro-invole-item">
+                    <div class="pro-invole-img">
+                    <img src="<?php echo DOMAIN;?>/public/img/fd8f5d3618960cc47a3e39f7b5e8d868.jpg" alt="" class="container-img">
+                    </div>
+                    <div class="pro-invole-main">
+                        <h4 class="pro-invole-name">Sản phẩm 1</h4>
+                        <span class="pro-invole-price">6000000</span>
+                    </div>
+                </div>
             </div>
         </div>
