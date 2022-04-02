@@ -122,11 +122,13 @@
                     
             <?php   
             $cart = $_SESSION["cart"]??[];         
+            $tien = 0;
             if(isset($cart) && is_array($cart) && count($cart) > 0){
                 foreach($cart as $cat){  
                     $money_paid = $cat['price'] * $cat['number'];
-                    $total += (int)$value["money_paid"];
-                      ?>
+                    $tien = $tien + $money_paid;
+                    $total[$cat['id']] = $money_paid;
+                    ?>
                     <tr>
                         <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
                         <td><?php echo $cat['prd_name']; ?></td>
@@ -137,8 +139,9 @@
                         <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
                         <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href="<?php echo build_layout_url("home/delete_pro")."&id=".$cat['id']."";; ?>"><i class="far fa-trash-alt"></i></a></td>
                     </tr>                            
-                            <?php }  
+                    <?php }  
             }
+            $sumtotal =array_sum($total);
                             ?>
                 </tbody>
            </table>
@@ -151,7 +154,7 @@
 <div class="payment">
     <div class="money-payment">
         <label class = "label">Tổng tiền:</label>
-        <span class = "payment-number"><?php echo number_format($total, 0, ',', ' '); ?>₫</span>
+        <span class = "payment-number"><?php echo number_format($sumtotal, 0, ',', ' '); ?>₫</span>
     </div>
      <a class ="link-payment" href="<?php echo build_layout_url("home/payment"); ?>">Thanh toán</a>
 </div>

@@ -20,8 +20,8 @@
                                     <span class="price"><?php echo number_format($cat['price'], 0, ',', ' '); ?> ₫</span>
                                     <span class="price-old"><?php echo number_format($cat['price_old'], 0, ',', ' '); ?> ₫</span>
                                     <button class="cart-product" onclick="addCart('<?php echo $cat['id']; ?>')" >
-                                        <a class="form-link">
-                                            <i class="fas fa-shopping-cart"></i>
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <a class="form-link" href="">
                                             <span class="cart-note">THÊM VÀO GIỎ</span>
                                         </a>
                                     </button>

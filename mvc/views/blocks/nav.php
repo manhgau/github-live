@@ -86,6 +86,7 @@
                           <?php  }else{ ?>
                             <!-- có sản phẩm ở giỏ hàng -->
                     <h4 class="header-cart--pro">Sản phẩm mới thêm</h4>
+                    <div class="cart-list--pro">
                     <?php   
                     $cart = $_SESSION["cart"]??[];         
                     if(isset($cart) && is_array($cart) && count($cart) > 0){
@@ -119,6 +120,7 @@
             }
         }
                             ?>
+                    </div>
                             <div class="footer-cart">
                                 <span class="footer-number"><?php echo $number;?> sản phẩm đã được thêm</span>
                                 <a class="footer-link" href="<?php echo build_layout_url("home/cart"); ?>">Xem giỏ hàng</a>
