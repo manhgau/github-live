@@ -85,46 +85,47 @@
 
                           <?php  }else{ ?>
                             <!-- có sản phẩm ở giỏ hàng -->
-                    <h4 class="header-cart--pro">Sản phẩm mới thêm</h4>
-                    <div class="cart-list--pro">
-                    <?php   
-                    $cart = $_SESSION["cart"]??[];         
-                    if(isset($cart) && is_array($cart) && count($cart) > 0){
-                        foreach($cart as $cat){  ?>
-                    <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
-                            <div class="cart-notify--pro">
-                                <div class="cart-pro-item">
-                                    <div class="cart-pro-item--img">
-                                    <img class="cart-img" style="<img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="" >
-                                    </div>
-                                    <div class="cart-pro-item--name">
-                                     <span class="pro-name"><?php echo $cat['prd_name']; ?></span> 
-                                     <!-- <div class="pro-category-wrap">
-                                         <label for="">Thể loại:</label>
-                                         <span class="pro-category">Thực phẩm chức năng</span>
-                                     </div>
-                                     <div>
-                                         <label for="">Số lượng:</label>
-                                         <span class="pro-number">4</span>
-                                     </div> -->
-                                    </div>
-                                    <div class="cart-pro-item--price">
-                                        <span><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</span>
-                                    </div>
-                                </div>
+                                        <h4 class="header-cart--pro">Sản phẩm mới thêm</h4>
+                                        <div class="cart-list--pro">
+                                            <?php   
+                                            $cart = $_SESSION["cart"]??[];         
+                                            if(isset($cart) && is_array($cart) && count($cart) > 0){
+                                                foreach($cart as $cat){  ?>
+                                            <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
+                                                    <div class="cart-notify--pro">
+                                                        <div class="cart-pro-item">
+                                                            <div class="cart-pro-item--img">
+                                                            <img class="cart-img" style="<img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="" >
+                                                            </div>
+                                                            <div class="cart-pro-item--name">
+                                                            <span class="pro-name"><?php echo $cat['prd_name']; ?></span> 
+                                                            <!-- <div class="pro-category-wrap">
+                                                                <label for="">Thể loại:</label>
+                                                                <span class="pro-category">Thực phẩm chức năng</span>
+                                                            </div>
+                                                            <div>
+                                                                <label for="">Số lượng:</label>
+                                                                <span class="pro-number">4</span>
+                                                            </div> -->
+                                                            </div>
+                                                            <div class="cart-pro-item--price">
+                                                                <span><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</span>
+                                                            </div>
+                                                        </div>
 
-                            </div>
-                    </a>
+                                                    </div>
+                                            </a>
 
-                          <?php }
-            }
-        }
-                            ?>
-                    </div>
-                            <div class="footer-cart">
-                                <span class="footer-number"><?php echo $number;?> sản phẩm đã được thêm</span>
-                                <a class="footer-link" href="<?php echo build_layout_url("home/cart"); ?>">Xem giỏ hàng</a>
-                            </div>
+                                            <?php }
+                                                }
+            
+                                            ?>
+                                        </div>
+                                        <div class="footer-cart">
+                                            <span class="footer-number"><?php echo $number;?> sản phẩm đã được thêm</span>
+                                            <a class="footer-link" href="<?php echo build_layout_url("home/cart"); ?>">Xem giỏ hàng</a>
+                                        </div>
+                            <?php } ?>
                          </div>
                     </div>
                     <div class="category-login mobile">

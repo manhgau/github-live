@@ -1,7 +1,7 @@
 <?php
 class User extends db {
  public function register ($name, $email, $password, $addres, $ad_id ){
-    $sql_reg ="INSERT INTO user(`name`,`email`,`password`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$addres', '$ad_id')";        
+    $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$addres', '$ad_id')";        
     mysqli_query($this->con, $sql_reg); 
     // var_dump($sql_reg);
     // die; 

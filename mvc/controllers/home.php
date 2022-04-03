@@ -188,19 +188,44 @@ class home extends controller{
         // danh mục sản phẩm
         $ProductCatModel = $this->model("CategoryModel");
         $product_categories = $ProductCatModel->getCategories(); 
+        // get oder
+        $ProductModel = $this->model("ProductModel");
+        $error = '';
+        if(!empty($_POST)){            
+            if(isset($_POST) && count($_POST) > 0) {
+                $name =$_POST['name']??'';
+                $email =$_POST['email']??'';
+                $phone =  $_POST['phone']??'';
+                $addres = $_POST['addres']??'';
+                $id_payment = $_POST['payment'];
+            }
+            if($name==""){
+                $error = "Vui lòng nhập tên";
+            }else if($email==""){
+                $error = "Vui lòng nhập email";
+            }else if($phone==""){
+                $error = "Vui lòng số điện thoại";
+            }else if($addres==""){
+                $error = "Vui lòng nhập addres";
+            }else{
+                $result = $ProductModel -> getOrder($name, $email, $phone, $addres, $id_payment);
+                if($result){
+                    redirect(build_layout_url('home/delete_pro'));        
+                }else{
+                    $error = "Đã có lỗi xảy ra, vui lòng thử lại sau";
+                }
+            }            
+        }
         $this->view("payment",[
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
         ]);
     }
     public function delete_pro (){
-        if (isset($_POST)){
-            //Xóa session
             if(isset($_SESSION['cart'])){
-                unset($_SESSION['$cart']);            
-            }  
-        }
-        redirect(build_layout_url("home/cart"));
+                unset($_SESSION['cart']);            
+            } 
+        redirect(build_layout_url("home"));
     }
 
 

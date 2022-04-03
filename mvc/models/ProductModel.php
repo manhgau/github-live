@@ -78,5 +78,27 @@ class ProductModel extends db {
         };
         return $products;
     }
+    public function getOrder ($name, $email, $phone, $addres, $id_payment){
+        $cart = $_SESSION["cart"]??[]; 
+        $soluong = 0;
+        if(isset($cart) && is_array($cart) && count($cart) > 0){
+            foreach($cart as $value){
+                $soluong +=$value["number"];
+                var_dump($soluong);
+                $money_paid = $value['price'] * $value['number'];
+                $total[$value['id']] = $money_paid;
+             }};
+             $sumtotal =array_sum($total);
+        
+        $sql ="INSERT INTO `order` (`name`,`email`,`phone`,`soluong`,`tongtien`,`diachi`,`id_payment`) VALUES ('$name', '$email', '$phone', '$soluong', '$sumtotal', '$addres', '$id_payment')";        
+        mysqli_query($this->con, $sql); 
+        // var_dump($sql); 
+        // die;
+        return true;
+    
+     }
+     public function getOrderItem () {
+        $cart = $_SESSION["cart"]??[]; 
+     }
 
 }

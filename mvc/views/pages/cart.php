@@ -103,9 +103,33 @@
 .link-payment:hover{
     opacity: 0.6;
 }
+.cart-nopro{
+    padding-top: 250px;
+}
+.cart-nopro p {
+    color:#ff5722;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
 
 </style>
 <div class="gird">
+<?php 
+    $cart = $_SESSION["cart"]??[];
+    $number = 0;
+    if(is_array($cart) && count($cart) > 0){
+        foreach($cart  as $value){
+             $number += (int)$value["number"];
+        }};
+    if($number == 0){ ?>
+    <!-- ko có sản phẩm -->
+        <div class="cart-nopro">
+             <p>Chưa có sản phẩm được thêm vào giỏ hàng</p>
+    </div>
+
+<?php  }else{ ?>
 <div class="table-wrap">
 <table class="table">
                 <thead class="thead-dark">
@@ -120,8 +144,7 @@
                 </thead>
                 <tbody>
                     
-            <?php   
-            $cart = $_SESSION["cart"]??[];         
+            <?php           
             $tien = 0;
             if(isset($cart) && is_array($cart) && count($cart) > 0){
                 foreach($cart as $cat){  
@@ -145,17 +168,18 @@
                             ?>
                 </tbody>
            </table>
-    <script>
-        function Del (name){
-            return confirm ("Bạn có chắc chắn muốn xóa sản phẩm: "+ name + "?");
-    }
-    </script>
+           <script>
+               function Del (name){
+                   return confirm ("Bạn có chắc chắn muốn xóa sản phẩm: "+ name + "?");
+                }
+                </script>
 </div>
 <div class="payment">
     <div class="money-payment">
         <label class = "label">Tổng tiền:</label>
         <span class = "payment-number"><?php echo number_format($sumtotal, 0, ',', ' '); ?>₫</span>
     </div>
-     <a class ="link-payment" href="<?php echo build_layout_url("home/payment"); ?>">Thanh toán</a>
+    <a class ="link-payment" href="<?php echo build_layout_url("home/payment"); ?>">Thanh toán</a>
 </div>
+<?php } ?>
 </div>

@@ -23,34 +23,34 @@
                     </div>
                     <?php }
                     ?> 
-                    <form action="" method="post">
+                    <form action="<?php echo build_layout_url("home/payment"); ?>" method="post">
                         <div class="input-wrap">
                             <i class="user-logo--item fas fa-user"></i>
-                            <input type="text" name="" id="" value= "<?php echo $name; ?>" class="user-input">
+                            <input type="text" name="name" id="" value= "<?php echo $name; ?>" placeholder = "Nhập tên" class="user-input">
                         </div>
                         <div class="input-wrap">
                              <i class="user-logo--item fas fa-envelope"></i>
-                            <input type="email" name="" id="" value= "<?php echo $email; ?>" class="user-input">
+                            <input type="email" name="email" id="" value= "<?php echo $email; ?>" placeholder = "Nhập email" class="user-input">
                         </div>
                         <div class="input-wrap">
                             <i class="user-logo--item fas fa-map-marked"></i>
-                            <input type="text" name="" id="" value= "<?php echo $addres; ?>" class="user-input">
+                            <input type="text" name="addres" id="" value= "<?php echo $addres; ?>" placeholder = "Nhập địa chỉ" class="user-input">
                         </div>
                         <div class="input-wrap">
                             <i class=" user-logo--item fas fa-mobile"></i>
-                            <input type="text" name="" id="" class="user-input">
+                            <input type="text" name="phone" id="" placeholder = "Nhập phone" class="user-input">
                         </div>
                         <div class="input-wrap">
                             <i class="user-logo--mess user-logo--item fas fa-comment"></i>
-                            <input type="text" name="" id="" class="user-input">
+                            <input type="text" name="mess" id="" placeholder = "Nhập lời nhắn" class="user-input">
                         </div>
                         <div class="input-wrap">
-                            <input type="radio" id="html" name="fav_language" value="Thanh toán khi nhận hàng">
-                            <label for="html">Thanh toán khi nhận hàng</label>
+                            <input type="radio" id="" name="payment" value="1">
+                            <label for="">Thanh toán khi nhận hàng</label>
                         </div>
                         <div class="input-wrap">
-                            <input type="radio" id="html" name="fav_language" value="Thanh toán qua chuyển khoản">
-                            <label for="html">Thanh toán qua chuyển khoản</label>
+                            <input type="radio" id="" name="payment" value="2">
+                            <label for="">Thanh toán qua chuyển khoản</label>
                             <div class="note-card">
                                 
                             </div>
