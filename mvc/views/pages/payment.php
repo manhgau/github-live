@@ -5,44 +5,58 @@
                 <h1 class="user-header"></h1>
                 <span class="user-note">Thông tin giao hàng</span>
                 <div class="user-payment">
+                <?php
+                    $check = check_login();
+                    $name = isset($_SESSION['name'])?$_SESSION['name']:'';
+                    $email = isset($_SESSION['email'])?$_SESSION['email']:'';
+                    $addres = isset($_SESSION['addres'])?$_SESSION['addres']:'';
+                    if($check==true){ 
+                        ?>
                     <div class="input-wrap">
                         <div >
                             <i class="user-logo fas fa-user-circle"></i>
                         </div>
                         <div class="user-information">
-                            <div class="user-heading">Lil manh</div>
-                            <div class="user-logout">Đăng xuất</div>
+                            <div class="user-heading"><?php echo $name; ?></div>
+                            <div class="user-logout">(<?php echo $email; ?>)</div>
                         </div>
                     </div>
-                    <div class="input-wrap">
-                        <i class="user-logo--item fas fa-user"></i>
-                        <input type="text" name="" id="" value= "lil mạnh" class="user-input" readonly>
-                    </div>
-                    <div class="input-wrap">
-                         <i class="user-logo--item fas fa-envelope"></i>
-                        <input type="email" name="" id="" value= "lil mạnh" class="user-input" readonly>
-                    </div>
-                    <div class="input-wrap">
-                        <i class=" user-logo--item fas fa-mobile"></i>
-                        <input type="text" name="" id="" value= "lil mạnh" class="user-input" readonly>
-                    </div>
-                    <div class="input-wrap">
-                        <i class="user-logo--item fas fa-map-marked"></i>
-                        <input type="text" name="" id="" value= "lil mạnh" class="user-input" readonly>
-                    </div>
-                    <div class="input-wrap">
-                        <i class="user-logo--mess user-logo--item fas fa-comment"></i>
-                        <input type="text" name="" id="" class="user-input">
-                    </div>
-                    <div class="input-wrap">
-                        <input type="radio" id="html" name="fav_language" value="Thanh toán khi nhận hàng">
-                        <label for="html">Thanh toán khi nhận hàng</label>
-                    </div>
-                    <div class="input-wrap">
-                        <input type="radio" id="html" name="fav_language" value="Thanh toán qua chuyển khoản">
-                        <label for="html">Thanh toán qua chuyển khoản</label>
-                    </div>
-                    <button>Hoàn tất đơn hàng</button>
+                    <?php }
+                    ?> 
+                    <form action="" method="post">
+                        <div class="input-wrap">
+                            <i class="user-logo--item fas fa-user"></i>
+                            <input type="text" name="" id="" value= "<?php echo $name; ?>" class="user-input">
+                        </div>
+                        <div class="input-wrap">
+                             <i class="user-logo--item fas fa-envelope"></i>
+                            <input type="email" name="" id="" value= "<?php echo $email; ?>" class="user-input">
+                        </div>
+                        <div class="input-wrap">
+                            <i class="user-logo--item fas fa-map-marked"></i>
+                            <input type="text" name="" id="" value= "<?php echo $addres; ?>" class="user-input">
+                        </div>
+                        <div class="input-wrap">
+                            <i class=" user-logo--item fas fa-mobile"></i>
+                            <input type="text" name="" id="" class="user-input">
+                        </div>
+                        <div class="input-wrap">
+                            <i class="user-logo--mess user-logo--item fas fa-comment"></i>
+                            <input type="text" name="" id="" class="user-input">
+                        </div>
+                        <div class="input-wrap">
+                            <input type="radio" id="html" name="fav_language" value="Thanh toán khi nhận hàng">
+                            <label for="html">Thanh toán khi nhận hàng</label>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="radio" id="html" name="fav_language" value="Thanh toán qua chuyển khoản">
+                            <label for="html">Thanh toán qua chuyển khoản</label>
+                            <div class="note-card">
+                                
+                            </div>
+                        </div>
+                        <input type="submit" value="Hoàn tất đơn hàng">
+                    </form>
                     <a class="form-link" href="<?php echo build_layout_url("home/cart"); ?>">Trở về giỏ hàng</a>
                 </div>
             </div>
@@ -103,6 +117,8 @@
         padding-left: 40px;
         width: 90%;
         outline: none;
+        border-radius: 5px;
+        border: 1px solid #999;
         }
     .user-logo--item {
         font-size: 25px;

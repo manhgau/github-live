@@ -26,8 +26,10 @@ class User extends db {
       $row_user =mysqli_fetch_array ($query_user); 
       $my_admin = $row_user['ad_id'];        
       if(is_array($row_user) && count($row_user) > 0  ){                                      
-          $_SESSION['user_id'] = $row_user['id'];                
-          $_SESSION['name'] = $row_user['name'];   
+          $_SESSION['user_id'] = $row_user['id'];         
+          $_SESSION['name'] = $row_user['name'];  
+          $_SESSION['email'] = $row_user['email'];  
+          $_SESSION['addres'] = $row_user['addres'];  
           //thực hiện login               
               if($my_admin == 1){                
                   $_SESSION['ad_id'] = $row_user['ad_id'];                                                                                                
@@ -39,17 +41,4 @@ class User extends db {
           $error = "Tài khoản không tồn tại";
       }
   }  
-  public function logout(){
-   if (isset($_POST)){
-       //Xóa session
-       if(isset($_SESSION['user_id'])){
-           unset($_SESSION['user_id']);
-           unset($_SESSION['ad_id']);            
-       }  
-       if(isset($_SESSION['name'])){
-           unset($_SESSION['name']);
-       }   
-   }
-   redirect(build_layout_url("home"));
-}
  }

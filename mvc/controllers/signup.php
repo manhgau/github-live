@@ -75,7 +75,13 @@ class signup extends controller{
             }  
             if(isset($_SESSION['name'])){
                 unset($_SESSION['name']);
-            }   
+            }
+            if(isset($_SESSION['email'])){
+                unset($_SESSION['email']);
+            }  
+            if(isset($_SESSION['addres'])){
+                unset($_SESSION['addres']);
+            }    
         }
         redirect(build_layout_url("home"));
     }
