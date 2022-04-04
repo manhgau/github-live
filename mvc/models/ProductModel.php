@@ -84,21 +84,54 @@ class ProductModel extends db {
         if(isset($cart) && is_array($cart) && count($cart) > 0){
             foreach($cart as $value){
                 $soluong +=$value["number"];
-                var_dump($soluong);
                 $money_paid = $value['price'] * $value['number'];
                 $total[$value['id']] = $money_paid;
-             }};
-             $sumtotal =array_sum($total);
-        
-        $sql ="INSERT INTO `order` (`name`,`email`,`phone`,`soluong`,`tongtien`,`diachi`,`id_payment`) VALUES ('$name', '$email', '$phone', '$soluong', '$sumtotal', '$addres', '$id_payment')";        
-        mysqli_query($this->con, $sql); 
+            }};
+            $sumtotal =array_sum($total);
+            
+            $sql ="INSERT INTO `order` (`name`,`email`,`phone`,`soluong`,`tongtien`,`diachi`,`id_payment`) VALUES ('$name', '$email', '$phone', '$soluong', '$sumtotal', '$addres', '$id_payment')";        
+            mysqli_query($this->con, $sql);
+            $order_id = $this->con->insert_id;
+            if(isset($cart) && is_array($cart) && count($cart) > 0){
+                foreach($cart as $value){
+                    $money_paid = $value['price'] * $value['number'];
+                    $prd_id = $value['id'];
+                    $prd_img = $value['img'];
+                    $prd_name = $value['prd_name'];
+                    $price = $value['price'];
+                    $number = $value['number'];
+                    $sql_prd_order ="INSERT INTO `order_item` (`order_id`,`prd_id`,`prd_img`,`prd_name`,`soluong`,`giatien`) VALUES ('$order_id', '$prd_id', '$prd_img', '$prd_name', '$number', '$price')";        
+                    mysqli_query($this->con, $sql_prd_order);
+                    var_dump($sql_prd_order); 
+                }};
+        // var_dump($order_id);
         // var_dump($sql); 
         // die;
         return true;
     
      }
-     public function getOrderItem () {
-        $cart = $_SESSION["cart"]??[]; 
+     public function callOrderUser () {
+        $user = [];
+        $name = isset($_SESSION['name'])?$_SESSION['name']:'';
+        $email = isset($_SESSION['email'])?$_SESSION['email']:'';
+        $sql_user = "SELECT * FROM `user` WHERE `email` = '".$email."' AND `name` = '".$name."' ";
+        $query_user = mysqli_query($this->con, $sql_user);                                   
+        while($row_user = mysqli_fetch_array($query_user)) {       
+            $user[] = $row_user;
+        }       
+        return  $user;
+        
+    }
+    public function callOrderPrd ($order_id) {
+        $prd  = [];
+        $sql_prd = "SELECT * FROM `order` WHERE `order_id` = $order_id";
+        $query_prd = mysqli_query($this->con, $sql_prd);
+        while($row_prd = mysqli_fetch_array($query_prd)) {       
+             $prd[] = $row_prd;
+         }
+         return $prd;
+
      }
+     
 
 }

@@ -131,7 +131,7 @@
 
 <?php  }else{ ?>
 <div class="table-wrap">
-<table class="table">
+        <table class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th>Ảnh sản phẩm</th>                       
@@ -167,7 +167,7 @@
             $sumtotal =array_sum($total);
                             ?>
                 </tbody>
-           </table>
+        </table>
            <script>
                function Del (name){
                    return confirm ("Bạn có chắc chắn muốn xóa sản phẩm: "+ name + "?");
@@ -179,7 +179,16 @@
         <label class = "label">Tổng tiền:</label>
         <span class = "payment-number"><?php echo number_format($sumtotal, 0, ',', ' '); ?>₫</span>
     </div>
-    <a class ="link-payment" href="<?php echo build_layout_url("home/payment"); ?>">Thanh toán</a>
+    <a class ="link-payment" href="
+    <?php
+    $check = check_login();
+    if ($check==true) {
+        echo build_layout_url("home/payment");
+    }else {
+        echo build_layout_url("signup/login");
+    }
+     ?>
+    ">Thanh toán</a>
 </div>
 <?php } ?>
 </div>

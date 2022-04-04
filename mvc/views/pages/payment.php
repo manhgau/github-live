@@ -6,12 +6,11 @@
                 <span class="user-note">Thông tin giao hàng</span>
                 <div class="user-payment">
                 <?php
-                    $check = check_login();
                     $name = isset($_SESSION['name'])?$_SESSION['name']:'';
                     $email = isset($_SESSION['email'])?$_SESSION['email']:'';
+                    $phone = isset($_SESSION['phone'])?$_SESSION['phone']:'';
                     $addres = isset($_SESSION['addres'])?$_SESSION['addres']:'';
-                    if($check==true){ 
-                        ?>
+                ?>
                     <div class="input-wrap">
                         <div >
                             <i class="user-logo fas fa-user-circle"></i>
@@ -21,8 +20,6 @@
                             <div class="user-logout">(<?php echo $email; ?>)</div>
                         </div>
                     </div>
-                    <?php }
-                    ?> 
                     <form action="<?php echo build_layout_url("home/payment"); ?>" method="post">
                         <div class="input-wrap">
                             <i class="user-logo--item fas fa-user"></i>
@@ -38,7 +35,7 @@
                         </div>
                         <div class="input-wrap">
                             <i class=" user-logo--item fas fa-mobile"></i>
-                            <input type="text" name="phone" id="" placeholder = "Nhập phone" class="user-input">
+                            <input type="text" name="phone" id="" value= "<?php echo $phone; ?>" placeholder = "Nhập phone" class="user-input">
                         </div>
                         <div class="input-wrap">
                             <i class="user-logo--mess user-logo--item fas fa-comment"></i>

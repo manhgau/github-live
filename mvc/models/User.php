@@ -1,11 +1,20 @@
 <?php
 class User extends db {
- public function register ($name, $email, $password, $addres, $ad_id ){
-    $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$addres', '$ad_id')";        
-    mysqli_query($this->con, $sql_reg); 
-    // var_dump($sql_reg);
-    // die; 
-    return true;
+ public function register ($name, $email, $password, $phone, $addres, $ad_id){
+    $sql="SELECT COUNT(*) AS so_luong FROM user WHERE `email` = '".$email."' AND `name` = '".$name."' ";
+    $query = mysqli_query($this->con, $sql); 
+    while($row = mysqli_fetch_array($query)){
+        $count = $row['so_luong'];
+      }
+    if ($count > 0){
+        return false;
+    }else{
+        $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`phone`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$phone', '$addres', '$ad_id')";        
+        mysqli_query($this->con, $sql_reg); 
+        // var_dump($sql_reg);
+        // die; 
+        return true;
+    }
 
  }
 
@@ -29,6 +38,7 @@ class User extends db {
           $_SESSION['user_id'] = $row_user['id'];         
           $_SESSION['name'] = $row_user['name'];  
           $_SESSION['email'] = $row_user['email'];  
+          $_SESSION['phone'] = $row_user['phone'];  
           $_SESSION['addres'] = $row_user['addres'];  
           //thực hiện login               
               if($my_admin == 1){                

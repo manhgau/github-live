@@ -9,7 +9,7 @@ class signup extends controller{
                 $name =$_POST['name']??'';
                 $email =$_POST['email']??'';
                 $password =  $_POST['password']??'';
-                // $passwordNew =  $_POST['password_new'];
+                $phone =  $_POST['phone'];
                 $addres = $_POST['addres']??'';
                 $ad_id = $_POST['ad_id']??'';
             }
@@ -21,10 +21,12 @@ class signup extends controller{
                 $error = "Vui lòng nhập password";
             }else if($addres==""){
                 $error = "Vui lòng nhập addres";
+            }else if($phone==""){
+                $error = "Vui lòng nhập số điện thoại";
             }else if($ad_id==""){
                 $error = "Vui lòng nhập level";
             }else{
-                $result = $UserModel -> register($name, $email, $password, $addres, $ad_id);
+                $result = $UserModel -> register($name, $email, $password, $phone, $addres, $ad_id);
                 if($result){
                     redirect(build_layout_url('home'));        
                 }else{
@@ -79,9 +81,12 @@ class signup extends controller{
             if(isset($_SESSION['email'])){
                 unset($_SESSION['email']);
             }  
+            if(isset($_SESSION['phone'])){
+                unset($_SESSION['phone']);
+            } 
             if(isset($_SESSION['addres'])){
                 unset($_SESSION['addres']);
-            }    
+            }   
         }
         redirect(build_layout_url("home"));
     }

@@ -145,6 +145,25 @@ class home extends controller{
             'product_categories'    =>  $product_categories,
         ]);
     }
+    public function user (){
+        //TIN TỨC
+       $NewsCategoryModel = $this->model("NewsCategoryModel");
+       $news_categories = $NewsCategoryModel->getCategories();  
+       // danh mục sản phẩm
+       $ProductCatModel = $this->model("CategoryModel");
+       $product_categories = $ProductCatModel->getCategories(); 
+       // call user 
+       $ProductModel = $this->model("ProductModel");
+       $user = $ProductModel->callOrderUser();
+       $order_id = $user['id'];
+       $prd = $ProductModel->callOrderPrd($order_id);
+       $this->view("user",[
+           'news_categories'       =>  $news_categories,
+           'product_categories'    =>  $product_categories,
+           'user'                  => $user,
+           'prd'                   => $prd,
+       ]);
+   }
     public function add_to_cart(){
         $prod_id = $_POST['id']??0; 
         $ProductModel = $this->model("ProductModel");
@@ -210,7 +229,7 @@ class home extends controller{
             }else{
                 $result = $ProductModel -> getOrder($name, $email, $phone, $addres, $id_payment);
                 if($result){
-                    redirect(build_layout_url('home/delete_pro'));        
+                    redirect(build_layout_url('home/delete_cart'));        
                 }else{
                     $error = "Đã có lỗi xảy ra, vui lòng thử lại sau";
                 }
@@ -221,11 +240,17 @@ class home extends controller{
             'product_categories'    =>  $product_categories,
         ]);
     }
-    public function delete_pro (){
+    public function delete_cart (){
             if(isset($_SESSION['cart'])){
                 unset($_SESSION['cart']);            
             } 
         redirect(build_layout_url("home"));
+    }
+    public function delete_cart_prd (){
+        if(isset($_SESSION['cart'])){
+            unset($_SESSION['cart']);            
+        } 
+    redirect(build_layout_url("home/cart"));
     }
 
 

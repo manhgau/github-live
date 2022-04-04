@@ -136,10 +136,12 @@
                         ?>
                     <div>
                         <div class="user-name">
-                            <div class="user">
-                                <i class="far fa-user-circle"></i>
-                                <p><?php echo $name; ?></p>
-                            </div>
+                            <a class="link-login" href="<?php echo build_layout_url("home/user"); ?>">
+                                <div class="user">
+                                    <i class="far fa-user-circle"></i>
+                                    <p><?php echo $name; ?></p>
+                                </div>
+                            </a>
                             <div class="logout-wrap">
                                 <form class="form-logout" method="post" action="<?php echo build_layout_url("signup/logout"); ?>">                 
                                     <button   button class="btn btn-success" type="submit">Đăng xuất</button>

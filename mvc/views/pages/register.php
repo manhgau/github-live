@@ -76,10 +76,10 @@
               <label class="header">Nhập mật khẩu:</label>
               <input type="password" class="form-control" name="password" placeholder = "Nhập password">
           </div>
-          <!-- <div class="form-group">
-              <label class="header">Nhập lại mật khẩu:</label>
-              <input type="password" class="form-control" name="retype_password" placeholder = "Nhập lại password">
-          </div> -->
+          <div class="form-group">
+              <label class="header">Nhập số điện thoại:</label>
+              <input type="text" class="form-control" name="phone" placeholder = "Nhập số điện thoại">
+          </div>
           <div class="form-group">
               <label class="header">Nhập địa chỉ:</label>
               <input type="text" class="form-control" value="<?php echo $addres;?>"  name="addres" placeholder = "Nhập địa chỉ">
