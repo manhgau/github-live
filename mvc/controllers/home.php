@@ -5,7 +5,8 @@
 class home extends controller{
 
     // Must have SayHi()
-    public function allproducts(){                
+    public function allproducts(){     
+        //echo date('H:i:s Y-m-d', 1649082908);die;           
         //danh sách tin tức
         $NewsCategoryModel = $this->model("NewsCategoryModel");
         $news_categories = $NewsCategoryModel->getCategories();   

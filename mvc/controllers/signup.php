@@ -11,7 +11,7 @@ class signup extends controller{
                 $password =  $_POST['password']??'';
                 $phone =  $_POST['phone'];
                 $addres = $_POST['addres']??'';
-                $ad_id = $_POST['ad_id']??'';
+                $ad_id = $_POST['ad_id']??'2';
             }
             if($name==""){
                 $error = "Vui lòng nhập tên";
@@ -23,14 +23,18 @@ class signup extends controller{
                 $error = "Vui lòng nhập addres";
             }else if($phone==""){
                 $error = "Vui lòng nhập số điện thoại";
-            }else if($ad_id==""){
-                $error = "Vui lòng nhập level";
             }else{
-                $result = $UserModel -> register($name, $email, $password, $phone, $addres, $ad_id);
-                if($result){
-                    redirect(build_layout_url('home'));        
+                $checkEmailExist = $UserModel->checkUserExitst($email);
+                if($checkEmailExist==true){
+                    $error = "Tài khoản đã tồn tại, vui lòng nhập email khác";
                 }else{
-                    $error = "Đã có lỗi xảy ra, vui lòng thử lại sau";
+                    $result = $UserModel -> register($name, $email, $password, $phone, $addres, $ad_id);
+                    if($result){
+                        $UserModel -> login($email, $password);
+                        redirect(build_layout_url('home'));        
+                    }else{
+                        $error = "Đã có lỗi xảy ra, vui lòng thử lại sau";
+                    }
                 }
             }            
         }

@@ -81,6 +81,7 @@ class ProductModel extends db {
     public function getOrder ($name, $email, $phone, $addres, $id_payment){
         $cart = $_SESSION["cart"]??[]; 
         $soluong = 0;
+        $user_id = $_SESSION["user_id"]??[];
         if(isset($cart) && is_array($cart) && count($cart) > 0){
             foreach($cart as $value){
                 $soluong +=$value["number"];
@@ -89,7 +90,7 @@ class ProductModel extends db {
             }};
             $sumtotal =array_sum($total);
             
-            $sql ="INSERT INTO `order` (`name`,`email`,`phone`,`soluong`,`tongtien`,`diachi`,`id_payment`) VALUES ('$name', '$email', '$phone', '$soluong', '$sumtotal', '$addres', '$id_payment')";        
+            $sql ="INSERT INTO `order` (`name`,`email`,`user_id`,`phone`,`soluong`,`tongtien`,`diachi`,`id_payment`, `created_at`) VALUES ('$name', '$email', '$user_id', '$phone', '$soluong', '$sumtotal', '$addres', '$id_payment', ".time()." )";                
             mysqli_query($this->con, $sql);
             $order_id = $this->con->insert_id;
             if(isset($cart) && is_array($cart) && count($cart) > 0){
@@ -102,7 +103,7 @@ class ProductModel extends db {
                     $number = $value['number'];
                     $sql_prd_order ="INSERT INTO `order_item` (`order_id`,`prd_id`,`prd_img`,`prd_name`,`soluong`,`giatien`) VALUES ('$order_id', '$prd_id', '$prd_img', '$prd_name', '$number', '$price')";        
                     mysqli_query($this->con, $sql_prd_order);
-                    var_dump($sql_prd_order); 
+                    //var_dump($sql_prd_order); 
                 }};
         // var_dump($order_id);
         // var_dump($sql); 

@@ -1,21 +1,25 @@
 <?php
 class User extends db {
- public function register ($name, $email, $password, $phone, $addres, $ad_id){
-    $sql="SELECT COUNT(*) AS so_luong FROM user WHERE `email` = '".$email."' AND `name` = '".$name."' ";
+ public function checkUserExitst ($email){
+    $sql="SELECT COUNT(*) AS so_luong FROM user WHERE `email` = '".$email."'";
     $query = mysqli_query($this->con, $sql); 
     while($row = mysqli_fetch_array($query)){
         $count = $row['so_luong'];
       }
     if ($count > 0){
+        return true;
+    }else{        
         return false;
-    }else{
-        $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`phone`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$phone', '$addres', '$ad_id')";        
+    }
+
+ }
+
+ public function register ($name, $email, $password, $phone, $addres, $ad_id){
+    $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`phone`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$phone', '$addres', '$ad_id')";        
         mysqli_query($this->con, $sql_reg); 
         // var_dump($sql_reg);
         // die; 
         return true;
-    }
-
  }
 
  public function getUserLevel (){

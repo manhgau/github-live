@@ -1,6 +1,8 @@
 
 <?php
 session_start();
+//set time zone
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 require_once "./lib/config.php";
 require_once "./lib/db.php";
 require_once "./lib/function.php";

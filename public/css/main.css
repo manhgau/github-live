@@ -674,7 +674,7 @@
     }
 }
 .cart-list--pro{
-    height: 590px;
+    max-height: 590px;
     overflow: hidden;
 }
 .cart-notify::before {

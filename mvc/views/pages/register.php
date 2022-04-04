@@ -84,19 +84,6 @@
               <label class="header">Nhập địa chỉ:</label>
               <input type="text" class="form-control" value="<?php echo $addres;?>"  name="addres" placeholder = "Nhập địa chỉ">
           </div>
-          <div class="form-group">
-              <label class="header">Nhập cấp độ quản lý:</label>
-              <select name="ad_id" class="form-control">
-                        <?php
-                            if(isset($user_level) && is_array($user_level) && count($user_level) > 0){
-                                foreach($user_level as $cat){ ?>
-                            <option class="form-option" value="<?php echo $cat['ad_id']?>">
-                            <?php echo $cat['ad_name']?>
-                            </option>
-                       <?php } 
-                       }?>
-                    </select>
-          </div>
           <button class="btn btn-success" type="submit">Đăng ký</button>
           <div class="container-footer">
                     <span>

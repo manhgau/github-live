@@ -42,46 +42,70 @@
                             </div>
                         </div>
                         <input type="submit" value="Cập nhập">
-                    <?php } }
+                        <?php } }
                     ?>
                     </form>
                 </div>  
             </div>
             <div class="user-prd">
-                <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Ảnh sản phẩm</th>                       
-                                <th>Tên sản phẩm</th>
-                                <th>Số lượng mua</th>
-                                <th>Đơn giá</th>
-                                <th>Thành tiền</th>
-                                <th>Trang thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <?php 
-                                if(isset($user) && is_array($user) && count($user) > 0){
-                                    foreach($user as $cat){ 
-                            ?>
-                                <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
-                                <td><?php echo $cat['prd_name']; ?></td>
-                                <td> </td>
-                                <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
-                                <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
-                                <td></td>
-                            <?php } }
-                            ?>
-                            </tr>                            
-                        </tbody>
-                </table>
+
             </div>
          </div>
     </div>
+ </div>
+<div class="model js-model">
+            <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Ảnh sản phẩm</th>                       
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng mua</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>Trang thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <?php 
+                            if(isset($user) && is_array($user) && count($user) > 0){
+                                foreach($user as $cat){ 
+                        ?>
+                            <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
+                            <td><?php echo $cat['prd_name']; ?></td>
+                            <td> </td>
+                            <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
+                            <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
+                            <td></td>
+                        <?php } }
+                        ?>
+                        </tr>                            
+                    </tbody>
+            </table>
 </div>
-<style>
-    .user-container-wrap{
+    <!-- Hàm hiển thị model mua vé ( thêm class open vào model) -->
+    <script>
+        const buyBtns = document.querySelectorAll('.js-buy-ticket');
+        const model = document.querySelector('.js-model');
+        const modelClose = document.querySelector('.js-model-footer-btn');
+        const modelCloseBtn = document.querySelector('.js-header-btn-close')
+        function showBuyTickets() {
+            model.classList.add('open');
+        }
+        function hishowBuyTickets(){            
+            model.classList.remove('open');
+        }
+        function nuthishowBuyTickets(){
+            model.classList.remove('open');
+        }
+        for (const buyBtn of buyBtns) {
+            buyBtn.addEventListener('click',showBuyTickets);
+        }
+        modelClose.addEventListener('click',hishowBuyTickets);
+        modelCloseBtn.addEventListener('click',nuthishowBuyTickets);
+    </script>
+    <style>
+        .user-container-wrap{
         padding-top: 250px;
     }
     .user-container{
@@ -104,7 +128,7 @@
     .user-information{
         box-shadow: 0 7px 64px rgb(0 0 0 / 7%);
         padding: 0 20px;
-
+        
     }
     .user-prd{
         box-shadow: 0 7px 64px rgb(0 0 0 / 7%);
@@ -135,8 +159,9 @@
         border-radius: 5px;
     }
     .table{
-        width: 100%;
-        border-spacing: 0;
+    width: 100%;
+    border: 1px solid;
+    border-spacing: 0;
     }
     .thead-dark{
         background:#24aeb1;
@@ -154,4 +179,5 @@
         border-bottom: 1px solid #999;
         
     }
-</style>
+    
+    </style>
