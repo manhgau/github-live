@@ -5,8 +5,7 @@
 class home extends controller{
 
     // Must have SayHi()
-    public function allproducts(){     
-        //echo date('H:i:s Y-m-d', 1649082908);die;           
+    public function allproducts(){               
         //danh sách tin tức
         $NewsCategoryModel = $this->model("NewsCategoryModel");
         $news_categories = $NewsCategoryModel->getCategories();   
@@ -155,14 +154,14 @@ class home extends controller{
        $product_categories = $ProductCatModel->getCategories(); 
        // call user 
        $ProductModel = $this->model("ProductModel");
-       $user = $ProductModel->callOrderUser();
-       $order_id = $user['id'];
-       $prd = $ProductModel->callOrderPrd($order_id);
+       $user = $ProductModel->callUser();
+       $user_id = $user[0]['id'];
+       $order = $ProductModel->callOrder($user_id);
        $this->view("user",[
            'news_categories'       =>  $news_categories,
            'product_categories'    =>  $product_categories,
            'user'                  => $user,
-           'prd'                   => $prd,
+           'order'                   => $order,
        ]);
    }
     public function add_to_cart(){
@@ -252,6 +251,22 @@ class home extends controller{
             unset($_SESSION['cart']);            
         } 
     redirect(build_layout_url("home/cart"));
+    }
+    public function order_prd (){
+        //TIN TỨC
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories(); 
+        // get oder prd
+        $ProductModel = $this->model("ProductModel");
+        $order_prd = $ProductModel->callOrderPrd();
+        $this->view("order_prd",[
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
+            'order_prd'             => $order_prd
+        ]);
     }
 
 

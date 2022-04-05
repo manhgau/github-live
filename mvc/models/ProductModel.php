@@ -81,7 +81,7 @@ class ProductModel extends db {
     public function getOrder ($name, $email, $phone, $addres, $id_payment){
         $cart = $_SESSION["cart"]??[]; 
         $soluong = 0;
-        $user_id = $_SESSION["user_id"]??[];
+        $user_id = $_SESSION["user_id"]??'';
         if(isset($cart) && is_array($cart) && count($cart) > 0){
             foreach($cart as $value){
                 $soluong +=$value["number"];
@@ -111,7 +111,7 @@ class ProductModel extends db {
         return true;
     
      }
-     public function callOrderUser () {
+     public function callUser () {
         $user = [];
         $name = isset($_SESSION['name'])?$_SESSION['name']:'';
         $email = isset($_SESSION['email'])?$_SESSION['email']:'';
@@ -123,15 +123,24 @@ class ProductModel extends db {
         return  $user;
         
     }
-    public function callOrderPrd ($order_id) {
-        $prd  = [];
-        $sql_prd = "SELECT * FROM `order` WHERE `order_id` = $order_id";
+    public function callOrder ($user_id){
+        $order = [];
+        $sql_order = "SELECT * FROM `order` WHERE `user_id` = '".$user_id."' ";
+        $query_order = mysqli_query($this->con, $sql_order);                                   
+        while($row_order = mysqli_fetch_array($query_order)) {       
+            $order[] = $row_order;
+        }       
+        return  $order;
+    }
+    public function callOrderPrd () {
+        $order_id= $_GET['id'];
+        $order_prd  = [];
+        $sql_prd = "SELECT * FROM order_item WHERE `order_id` = $order_id";
         $query_prd = mysqli_query($this->con, $sql_prd);
         while($row_prd = mysqli_fetch_array($query_prd)) {       
-             $prd[] = $row_prd;
+             $order_prd[] = $row_prd;
          }
-         return $prd;
-
+         return $order_prd;
      }
      
 

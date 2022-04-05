@@ -47,65 +47,95 @@
                     </form>
                 </div>  
             </div>
-            <div class="user-prd">
-
+            <div class="user-order">
+                <h3 class="user-order-header">Đơn hàng của tôi</h3>
+                <?php 
+                        if(isset($order) && is_array($order) && count($order) > 0){
+                            foreach($order as $cat){ 
+                            $created_at    = date('H:i:s Y-m-d', $cat['created_at']);
+                    ?>
+                <div class="order-content">
+                    <div class="user-order-item">
+                        <div class="order-item-wrap">
+                            <div class="label-order">
+                                <label>Tên</label>
+                            </div>
+                            <span class="order-item-heading"><?php echo $cat['name']; ?></span>
+                        </div>
+                        <div class="order-item-wrap">
+                            <div class="label-order">
+                                <label>Số lượng</label>
+                            </div>
+                            <span class="order-item-heading"><?php echo $cat['soluong']; ?></span>
+                        </div>
+                        <div class="order-item-wrap">
+                            <div class="label-order">
+                                <label>Tổng tiền</label>
+                            </div>
+                            <span class="order-item-heading"><?php echo number_format($cat['tongtien'], 0, ',', ' '); ?>₫</span>                       
+                        </div>
+                        <div class="order-item-wrap">
+                            <div class="label-order">
+                                <label>Ngày mua</label>
+                            </div>
+                            <span class="order-item-heading"><?php echo $created_at; ?></span>
+                        </div>
+                    </div>
+                    <a href="<?php echo build_layout_url("home/order_prd")."&id=".$cat['id']."";; ?>" class="jd-prd-order">Chi tiết</a>
+                </div>
+                <?php } 
+                }?>
             </div>
          </div>
     </div>
- </div>
-<div class="model js-model">
-            <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Ảnh sản phẩm</th>                       
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng mua</th>
-                            <th>Đơn giá</th>
-                            <th>Thành tiền</th>
-                            <th>Trang thái</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <?php 
-                            if(isset($user) && is_array($user) && count($user) > 0){
-                                foreach($user as $cat){ 
-                        ?>
-                            <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
-                            <td><?php echo $cat['prd_name']; ?></td>
-                            <td> </td>
-                            <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
-                            <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
-                            <td></td>
-                        <?php } }
-                        ?>
-                        </tr>                            
-                    </tbody>
-            </table>
 </div>
-    <!-- Hàm hiển thị model mua vé ( thêm class open vào model) -->
-    <script>
-        const buyBtns = document.querySelectorAll('.js-buy-ticket');
-        const model = document.querySelector('.js-model');
-        const modelClose = document.querySelector('.js-model-footer-btn');
-        const modelCloseBtn = document.querySelector('.js-header-btn-close')
-        function showBuyTickets() {
-            model.classList.add('open');
-        }
-        function hishowBuyTickets(){            
-            model.classList.remove('open');
-        }
-        function nuthishowBuyTickets(){
-            model.classList.remove('open');
-        }
-        for (const buyBtn of buyBtns) {
-            buyBtn.addEventListener('click',showBuyTickets);
-        }
-        modelClose.addEventListener('click',hishowBuyTickets);
-        modelCloseBtn.addEventListener('click',nuthishowBuyTickets);
-    </script>
     <style>
-        .user-container-wrap{
+    .jd-prd-order {
+        min-width: 144px;
+        height: 40px;
+        margin-top: 25px;
+        background: trang;
+        background: transparent;
+        outline: none;
+        border: none;
+        color: #009688;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .jd-prd-order:hover{
+        opacity: 0.7;
+    }
+    .user-order-header{
+        padding: 15px 0;
+        border-bottom: 1px solid #999;
+        font-size: 20px;
+        font-weight: 400;
+    }
+    .order-content{
+        display: flex;
+        border-bottom: 1px solid #999;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .user-order-item{
+        display: flex;
+        flex-direction: column;
+    }
+    .order-item-wrap{
+        display: flex;
+        padding-bottom: 5px;
+    }
+    .label-order {
+        font-size: 16px;
+        min-width: 150px;
+        color: #009688;
+        padding: 0 20px;
+    }
+    .order-item-heading{
+        font-size: 16px;
+        color: #999;
+    }
+    .user-container-wrap{
         padding-top: 250px;
     }
     .user-container{
@@ -130,10 +160,11 @@
         padding: 0 20px;
         
     }
-    .user-prd{
+    .user-order{
         box-shadow: 0 7px 64px rgb(0 0 0 / 7%);
         width: 60%;
         margin-left: 30px;
+        padding: 0 20px;
     }
     .user-item{
         display: flex;
@@ -158,26 +189,4 @@
         border: 1px solid #999;
         border-radius: 5px;
     }
-    .table{
-    width: 100%;
-    border: 1px solid;
-    border-spacing: 0;
-    }
-    .thead-dark{
-        background:#24aeb1;
-        color: #fff;
-    }
-    .table th {
-        padding: 10px 0;
-        border-right: 1px solid #999;
-        border-bottom: 1px solid #999;
-    }
-    .table td{
-        padding: 10px 10px 0 10px;
-        text-align: center;
-        /* border-right: 1px solid #999; */
-        border-bottom: 1px solid #999;
-        
-    }
-    
     </style>
