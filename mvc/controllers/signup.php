@@ -9,7 +9,7 @@ class signup extends controller{
                 $name =$_POST['name']??'';
                 $email =$_POST['email']??'';
                 $password =  $_POST['password']??'';
-                $password = password_hash($password, PASSWORD_DEFAULT);
+                $password_hash = md5($password);
                 $phone =  $_POST['phone'];
                 $addres = $_POST['addres']??'';
                 $ad_id = $_POST['ad_id']??'2';
@@ -29,10 +29,9 @@ class signup extends controller{
                 if($checkEmailExist==true){
                     $error = "Tài khoản đã tồn tại, vui lòng nhập email khác";
                 }else{
-                    $result = $UserModel -> register($name, $email, $password, $phone, $addres, $ad_id);
+                    $result = $UserModel -> register($name, $email, $password_hash, $phone, $addres, $ad_id);
                     if($result){
-                        $UserModel -> login($email, $password);
-                        redirect(build_layout_url('home'));        
+                        redirect(build_layout_url('signup/login'));        
                     }else{
                         $error = "Đã có lỗi xảy ra, vui lòng thử lại sau";
                     }
@@ -49,7 +48,7 @@ class signup extends controller{
             'user_level'    =>  $user_level,
             'error' => $error,
             'name' => $name,
-                'email' => $email,
+            'email' => $email,
             'addres' => $addres,
         ]);
     }
@@ -75,18 +74,18 @@ class signup extends controller{
                 //var_dump($user_email);
                 //var_dump($email);
                 // $hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
+                // $t = password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
+                // var_dump($t);
  
-                // if (password_verify('rasmuslerdorf', $hash)) {
+                // if (password_verify('rasmuslerdorf',$t)) {
                 //     echo 'Password is valid!';
                 // } else {
                 //     echo 'Invalid password.';
-                // }
-                var_dump($password);
-                var_dump($hash);
-                var_dump(password_verify ((String)$password , (String)$hash));
-                die;
-                if (password_verify ($password , $hash)){ 
-                    print "Logged in";
+                // }                        
+                // die; 
+                $password = md5($password);
+                if ($password == $hash){ 
+                        print "Logged in";
                         $_SESSION['user_id'] = $row_user['id'];         
                         $_SESSION['name'] = $row_user['name'];  
                         $_SESSION['email'] = $row_user['email'];  

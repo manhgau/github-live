@@ -105,18 +105,17 @@
 
 </style>
     <div class="product-wrap">
+<?php            
+    if(isset($product) && is_array($product) && count($product) > 0){
+        foreach($product as $cat){  
+ ?>
         <div class="row"  >
             <ol class="breadcrumb" >
                 <li>Trang chủ</li>
-                <li>Danh mục sản phẩm</li>
-                <li>Sản phẩm HOT-SALE</li>
-                            
+                <li class="separation">Danh mục sản phẩm</li>
+                <li class="separation"><?php echo $cat['prd_name']; ?></li>             
             </ol>
         </div>
-        <?php            
-    if(isset($product) && is_array($product) && count($product) > 0){
-        foreach($product as $cat){  
-              ?>
         <div class="product">
                 <div class="product_img">
                 <img src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="" class="container-img">

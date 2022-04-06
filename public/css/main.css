@@ -777,3 +777,7 @@
     border-radius: 4px;
     display: flex;
 }
+.separation::before {
+    content: "/";
+    padding: 0 5px;
+}

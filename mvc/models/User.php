@@ -14,8 +14,8 @@ class User extends db {
 
  }
 
- public function register ($name, $email, $password, $phone, $addres, $ad_id){
-    $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`phone`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password', '$phone', '$addres', '$ad_id')";        
+ public function register ($name, $email, $password_hash, $phone, $addres, $ad_id){
+    $sql_reg ="INSERT INTO `user`(`name`,`email`,`password`,`phone`,`addres`,`ad_id`) VALUES ('$name', '$email', '$password_hash', '$phone', '$addres', '$ad_id')";            
         mysqli_query($this->con, $sql_reg); 
         // var_dump($sql_reg);
         // die; 

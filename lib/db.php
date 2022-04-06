@@ -5,4 +5,18 @@
     }else{
         echo 'kết nối thất bại';
     }
+
+    // try {
+
+    //     $connect = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME."", DB_USER, DB_PASSWORD);
+    //     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // }
+    
+    // catch(PDOException $e) {
+    
+    //     $connect = null;
+    //     echo "Connection failed: " . $e->getMessage();
+    
+    // }
 ?>

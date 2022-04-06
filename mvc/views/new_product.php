@@ -2,8 +2,8 @@
 <div class="row"  >
             <ol class="breadcrumb" >
                 <li>Trang chủ</li>
-                <li>Danh mục sản phẩm</li>
-                <li>Sản phẩm HOT-SALE</li>
+                <li class="separation">Danh mục sản phẩm</li>
+                <li class="separation">Sản phẩm Mới</li>
                             
             </ol>
  </div>
