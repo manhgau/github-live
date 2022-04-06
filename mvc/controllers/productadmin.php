@@ -112,4 +112,12 @@
             $AdminModel->Xoa();
             redirect(build_layout_url("productadmin/danhsach"));  
         }
+        public function admin_order(){
+            $this->layout = 'admin';
+            $AdminModel = $this->model("AdminModel");
+            $user_order = $AdminModel->adminOrder();  
+            $this -> view ("admin_order",[
+                'user_order'        => $user_order
+            ]);
+        }
     }

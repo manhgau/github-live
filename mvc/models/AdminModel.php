@@ -56,4 +56,13 @@ class AdminModel extends db {
         return  $categories;
 
     }
+    public function adminOrder (){
+        $user_order = [];
+        $sql = "SELECT * FROM `order` ";
+        $query = mysqli_query($this->con,$sql);
+        while($row = mysqli_fetch_array($query)) {       
+            $user_order[] = $row;
+        }                                              
+        return $user_order;
+    }
 }

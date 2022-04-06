@@ -103,9 +103,16 @@
         padding-top: 50px;
     }
 
-
 </style>
     <div class="product-wrap">
+        <div class="row"  >
+            <ol class="breadcrumb" >
+                <li>Trang chủ</li>
+                <li>Danh mục sản phẩm</li>
+                <li>Sản phẩm HOT-SALE</li>
+                            
+            </ol>
+        </div>
         <?php            
     if(isset($product) && is_array($product) && count($product) > 0){
         foreach($product as $cat){  

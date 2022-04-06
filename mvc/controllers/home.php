@@ -247,9 +247,14 @@ class home extends controller{
         redirect(build_layout_url("home"));
     }
     public function delete_cart_prd (){
-        if(isset($_SESSION['cart'])){
-            unset($_SESSION['cart']);            
-        } 
+        $id = $_GET['id'];
+        var_dump($id);
+        die();
+        if (isset($_GET['id'])){
+            if(isset($_SESSION['cart'])){
+                unset($_SESSION['cart']);            
+            } 
+        }
     redirect(build_layout_url("home/cart"));
     }
     public function order_prd (){

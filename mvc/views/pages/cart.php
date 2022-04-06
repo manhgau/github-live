@@ -160,7 +160,7 @@
                         </td>
                         <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
                         <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
-                        <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href="<?php echo build_layout_url("home/delete_pro")."&id=".$cat['id']."";; ?>"><i class="far fa-trash-alt"></i></a></td>
+                        <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href="<?php echo build_layout_url("home/delete_cart_prd")."&id=".$cat['id']."";; ?>"><i class="far fa-trash-alt"></i></a></td>
                     </tr>                            
                     <?php }  
             }

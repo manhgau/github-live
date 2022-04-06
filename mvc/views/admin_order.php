@@ -1,0 +1,1 @@
+<?php require_once "./mvc/views/pages/admin_order.php" ?>

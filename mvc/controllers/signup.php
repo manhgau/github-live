@@ -9,6 +9,7 @@ class signup extends controller{
                 $name =$_POST['name']??'';
                 $email =$_POST['email']??'';
                 $password =  $_POST['password']??'';
+                $password = password_hash($password, PASSWORD_DEFAULT);
                 $phone =  $_POST['phone'];
                 $addres = $_POST['addres']??'';
                 $ad_id = $_POST['ad_id']??'2';
@@ -53,11 +54,11 @@ class signup extends controller{
         ]);
     }
     public function login (){
-    $error = "";
-    $email = $password = "";
-    $this->layout = 'main_signup';
-    $UserModel = $this->model("User");   
-    if (!empty($_POST)){
+        //$email = $password = "";
+        $this->layout = 'main_signup';
+        $UserModel = $this->model("User");   
+        $error = '';
+        if (!empty($_POST)){
         $email =$_POST['email']??'';
         $password =  $_POST['password']??'';
         if($email==""){
@@ -65,7 +66,46 @@ class signup extends controller{
         }elseif ($password==""){
             $error = "Vui lòng nhập password";
         }else{
-            $result = $UserModel -> login($email, $password);
+            $row_user = $UserModel -> login($email);
+            $my_admin = $row_user['ad_id'];
+            $hash = $row_user['password'];
+            $user_email = $row_user['email'];
+            //die($hash) ;
+            if($user_email == $email ){    
+                //var_dump($user_email);
+                //var_dump($email);
+                // $hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
+ 
+                // if (password_verify('rasmuslerdorf', $hash)) {
+                //     echo 'Password is valid!';
+                // } else {
+                //     echo 'Invalid password.';
+                // }
+                var_dump($password);
+                var_dump($hash);
+                var_dump(password_verify ((String)$password , (String)$hash));
+                die;
+                if (password_verify ($password , $hash)){ 
+                    print "Logged in";
+                        $_SESSION['user_id'] = $row_user['id'];         
+                        $_SESSION['name'] = $row_user['name'];  
+                        $_SESSION['email'] = $row_user['email'];  
+                        $_SESSION['phone'] = $row_user['phone'];  
+                        $_SESSION['addres'] = $row_user['addres'];  
+                        //thực hiện login               
+                            if($my_admin == 1){                
+                                $_SESSION['ad_id'] = $row_user['ad_id'];                                                                                                
+                                redirect(build_layout_url("productadmin/danhsach", true));                        
+                            }else{                                     
+                                redirect(build_layout_url("home"));
+                            }                           
+                }else{
+                        $error = "Mật khẩu không chính xác";
+                        print "Password Incorrect";
+                    }
+            }else{
+              $error = "Tài khoản không tồn tại";
+          }
         }
     }
     $this ->view("login",[
