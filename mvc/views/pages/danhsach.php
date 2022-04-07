@@ -91,12 +91,27 @@
     color: #fff;
 
 }
+.menu-wrap{
+    display: flex;
+    flex-direction: column;
+}
+.link-menu{
+    text-decoration: none;
+    padding: 10px;
+    color: #fff;
+}
+.link-menu:hover{
+    color: #bebbbb;
+}
 
 </style>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h2>Danh sách sản phẩm</h2>
+            <div class="menu-wrap">
+                <h2>Danh sách sản phẩm</h2>
+                <a class="link-menu" href="<?php echo build_layout_url("productadmin/admin_order");?>">Danh sách đơn hàng</a>
+            </div>
             <?php
                 $check = check_login();
                 if($check==true){ 
