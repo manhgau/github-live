@@ -75,7 +75,7 @@
                 </div>
                 <div class="form_group">
                     <label for="">Mô tả sản phẩm</label>
-                    <textarea name="description" rows=5 class="form_control" require"></textarea>                    
+                    <textarea name="description" id="description" rows=5 class="form_control" require"></textarea>                    
                 </div>
                 <div class="form_group">
                     <label for="">Số lượng đã bán</label>
@@ -112,3 +112,9 @@
         </div>
     </div>
 </div>
+
+<script>
+      tinymce.init({
+        selector: '#description'
+      });
+    </script>

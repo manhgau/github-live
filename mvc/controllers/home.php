@@ -42,25 +42,28 @@ class home extends controller{
         $news_categories = $NewsCategoryModel->getCategories();  
         // danh mục sản phẩm
         $ProductCatModel = $this->model("CategoryModel");
-        $product_categories = $ProductCatModel->getCategories(); 
-        // danh sách sản phẩm mới
-        $ProductModel = $this->model("ProductModel");
-        $all_products = $ProductModel->getAllProducts();  
+        $product_categories = $ProductCatModel->getCategories();         
         // Phân trang
-        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
-        $item_perz_page = max(1, $item_perz_page);
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 10;
+        $limit = max(1, $limit);
 
-        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
-        $current_page = max(1, $current_page); 
+        $page = !empty($_GET['page']) ? $_GET['page'] : 1;
+        $page = max(1, $page); 
+        $offset = ($page - 1) * $limit;
+
+        // danh sách sản phẩm mới
+        $ProductModel = $this->model("ProductModel");                
         $total_products = $ProductModel->countProducts();  
-        $total_page = ceil ($total_products / $item_perz_page);           
+        $all_products = $ProductModel->getAllProducts($offset, $limit);  
+        $total_page = ceil ($total_products / $limit);                  
         $this->view("all_products",[
-            'all_products'         => $all_products,
+            'all_products'          => $all_products,
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
-            'total_page'            => $total_page,
-            'item_perz_page'        => $item_perz_page,
-            'current_page'          => $current_page
+            'total_page'            =>  $total_page,
+            'limit'                 =>  $limit,
+            'page'                  =>  $page,
+            'base_url'              =>  build_layout_url("home/all_products")
         ]);
     }
     function new_product(){   

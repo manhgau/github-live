@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<?php echo build_css_url('main.css');?>"/>
     <link rel="stylesheet" href="<?php echo build_css_url('base.css'); ?>" />   
     <link rel="stylesheet" href="<?php echo DOMAIN; ?>/public/fonts/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 </head>
 <body>    

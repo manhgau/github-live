@@ -34,7 +34,7 @@ class ProductModel extends db {
 
     public function getAllProducts($offset=0, $limit=5){            
         $products = [];
-        $sql = "SELECT * FROM products LIMIT $offset, $limit ";
+        $sql = "SELECT * FROM products LIMIT $offset, $limit ";        
         $query = mysqli_query($this->con, $sql);        
         while($row = mysqli_fetch_array($query)) {       
             $products[] = $row;
