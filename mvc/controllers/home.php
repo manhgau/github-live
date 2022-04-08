@@ -119,6 +119,90 @@ class home extends controller{
         ]);
 
     }
+    function high_to_low_prd(){
+        //TIN TỨC
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories(); 
+        // SẢN PHÂM NỔI BẬT
+        $ProductModel = $this->model("ProductModel");
+        $high_to_low_prd = $ProductModel->highToLow();
+        // Phân trang
+        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
+        $item_perz_page = max(1, $item_perz_page);
+
+        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
+        $current_page = max(1, $current_page); 
+        $total_products = $ProductModel->countProducts();  
+        $total_page = ceil ($total_products / $item_perz_page);   
+        $this->view("high_to_low_prd", [
+            'high_to_low_prd'     => $high_to_low_prd,
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
+            'total_page'            => $total_page,
+            'item_perz_page'        => $item_perz_page,
+            'current_page'          => $current_page
+        ]);
+
+    }
+    function low_to_high_prd(){
+        //TIN TỨC
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories(); 
+        // SẢN PHÂM NỔI BẬT
+        $ProductModel = $this->model("ProductModel");
+        $low_to_high_prd = $ProductModel->lowToHigh();
+        // Phân trang
+        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
+        $item_perz_page = max(1, $item_perz_page);
+
+        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
+        $current_page = max(1, $current_page); 
+        $total_products = $ProductModel->countProducts();  
+        $total_page = ceil ($total_products / $item_perz_page);   
+        $this->view("low_to_high_prd", [
+            'low_to_high_prd'     => $low_to_high_prd,
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
+            'total_page'            => $total_page,
+            'item_perz_page'        => $item_perz_page,
+            'current_page'          => $current_page
+        ]);
+
+    }
+    function selling_products(){
+        //TIN TỨC
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories(); 
+        // SẢN PHÂM NỔI BẬT
+        $ProductModel = $this->model("ProductModel");
+        $selling_products = $ProductModel->getSellingProducts();
+        // Phân trang
+        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
+        $item_perz_page = max(1, $item_perz_page);
+
+        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
+        $current_page = max(1, $current_page); 
+        $total_products = $ProductModel->countProducts();  
+        $total_page = ceil ($total_products / $item_perz_page);   
+        $this->view("selling_products", [
+            'selling_products'     => $selling_products,
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
+            'total_page'            => $total_page,
+            'item_perz_page'        => $item_perz_page,
+            'current_page'          => $current_page
+        ]);
+
+    }
     public function product (){
         $NewsCategoryModel = $this->model("NewsCategoryModel");
         $news_categories = $NewsCategoryModel->getCategories();  
@@ -165,6 +249,7 @@ class home extends controller{
        ]);
    }
     public function add_to_cart(){
+        $number_cart = isset($_POST['number_cart'])?$_POST['number_cart']:0;
         $prod_id = $_POST['id']??0; 
         $ProductModel = $this->model("ProductModel");
         $product_shopping = $ProductModel->shoppingCart();
@@ -175,7 +260,7 @@ class home extends controller{
                 'img' =>$cat[1],
                 'prd_name' =>$cat[2],
                 'price' =>$cat[3],
-                'number' =>1,
+                'number' => $number_cart + 1,
             );
         }else{
             $cart = $_SESSION["cart"];
@@ -185,7 +270,7 @@ class home extends controller{
                     'img' =>$cat[1],
                     'prd_name' =>$cat[2],
                     'price' =>$cat[3],
-                    'number' =>(int)$cart[$prod_id]["number"] +1
+                    'number' =>(int)$cart[$prod_id]["number"] +1 + $number_cart
                 );
             }else{
                 $cart[$prod_id] = array(
@@ -193,7 +278,7 @@ class home extends controller{
                     'img' =>$cat[1],
                     'prd_name' =>$cat[2],
                     'price' =>$cat[3],
-                    'number' =>1
+                    'number' =>1 + $number_cart
                 );
             }
         }  

@@ -121,7 +121,7 @@
     $number = 0;
     if(is_array($cart) && count($cart) > 0){
         foreach($cart  as $value){
-             $number += (int)$value["number"];
+            $number += $number + (int)$value["number"];
         }};
     if($number == 0){ ?>
     <!-- ko có sản phẩm -->
@@ -137,8 +137,9 @@
                         <th>Ảnh sản phẩm</th>                       
                         <th>Tên sản phẩm</th>
                         <th>Số lượng mua</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
+                        <th>Cập nhập</th>
+                        <th>Đơn giá của sản phẩm</th>
+                        <th>Thành tiền của sản phẩm</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -155,9 +156,14 @@
                     <tr>
                         <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
                         <td><?php echo $cat['prd_name']; ?></td>
-                        <td>
-                            <input class="cart-number" type="number" value="<?php echo $cat['number']; ?>">
-                        </td>
+                        <form action="" method="post">
+                            <td>
+                                <input class="cart-number" type="number" name="number_cart" value="<?php echo $cat['number']; ?>">
+                            </td>
+                            <td>
+                                <input type="submit" value="Cập nhập">
+                            </td>
+                        </form>
                         <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
                         <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
                         <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href="<?php echo build_layout_url("home/delete_cart_prd")."&id=".$cat['id']."";; ?>"><i class="far fa-trash-alt"></i></a></td>

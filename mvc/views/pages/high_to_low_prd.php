@@ -1,5 +1,4 @@
-
-    <div class="gird">
+<div class="gird">
         <div class="gird__row">
             <div class="container-header">
                 <h3 class="container-heading">Tất cả sản phẩm</h3>
@@ -7,8 +6,8 @@
                 <div class="gird">
                     <div class="gird__row">
                         <?php            
-                            if(isset($all_products) && is_array($all_products) && count($all_products) > 0){
-                                foreach($all_products as $cat){  
+                            if(isset($high_to_low_prd) && is_array($high_to_low_prd) && count($high_to_low_prd) > 0){
+                                foreach($high_to_low_prd as $cat){  
                                     ?>
                                 <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
 

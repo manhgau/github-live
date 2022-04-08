@@ -41,7 +41,7 @@
                             <input type="text" name="addres" id="" value= "<?php echo $cat['addres']; ?>" placeholder = "Nhập tên" class="user-input">
                             </div>
                         </div>
-                        <input type="submit" value="Cập nhập">
+                        <!-- <input type="submit" value="Cập nhập"> -->
                         <?php } }
                     ?>
                     </form>

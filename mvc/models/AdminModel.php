@@ -9,9 +9,9 @@ class AdminModel extends db {
         }                                              
         return $products;
     }
-    public function Them($image, $prd_name, $price, $price_old, $quantity, $description, $sold, $category_id, $hot){
-        $sql_reg ="INSERT INTO products(`img`, `prd_name`, `price`, `price_old`, `quantity`,`description`, `sold`,`category_id`, `hot`)
-         VALUES ('$image', '$prd_name', $price, $price_old, $quantity, '$description', $sold, $category_id, $hot)";        
+    public function Them($image, $prd_name, $price, $price_old, $discount, $quantity, $description, $sold, $category_id, $hot){
+        $sql_reg ="INSERT INTO products(`img`, `prd_name`, `price`, `price_old`,`discount`, `quantity`,`description`, `sold`,`category_id`, `hot`)
+         VALUES ('$image', '$prd_name', $price, $price_old , $discount, $quantity, '$description', $sold, $category_id, $hot)";        
         mysqli_query($this->con, $sql_reg);   
     //         var_dump($sql_reg);
     // die;  

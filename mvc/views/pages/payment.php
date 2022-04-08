@@ -39,10 +39,10 @@
                         </div>
                         <div class="input-wrap">
                             <i class="user-logo--mess user-logo--item fas fa-comment"></i>
-                            <input type="text" name="mess" id="" placeholder = "Nhập lời nhắn" class="user-input">
+                            <textarea type="text" name="mess" rows=5 id="" placeholder = "Nhập lời nhắn" class="user-input" require></textarea>
                         </div>
                         <div class="input-wrap">
-                            <input type="radio" id="" name="payment" value="1">
+                            <input type="radio" id="" name="payment" value="1" checked>
                             <label for="">Thanh toán khi nhận hàng</label>
                         </div>
                         <div class="input-wrap">
@@ -52,9 +52,11 @@
                                 
                             </div>
                         </div>
-                        <input type="submit" value="Hoàn tất đơn hàng">
+                        <div class="input-link-out">
+                            <input type="submit" value="Hoàn tất đơn hàng" class="btn-input">
+                            <a class="form-link" href="<?php echo build_layout_url("home/cart"); ?>">Trở về giỏ hàng</a>
+                        </div>
                     </form>
-                    <a class="form-link" href="<?php echo build_layout_url("home/cart"); ?>">Trở về giỏ hàng</a>
                 </div>
             </div>
         <div class="pro-list">
@@ -98,8 +100,27 @@
 </div>
 </div>
 <style>
-    .user-logo--mess{
-
+    .input-link-out{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
+    .btn-input {
+    padding: 10px;
+    background: #795548;
+    outline: none;
+    border: 1px solid;
+    color: #fff;
+    cursor: pointer;
+    }
+    .btn-input:hover{
+        opacity: 0.6;
+    }
+    .input-link-out a {
+        margin-right: 47px;
+        color: #00bcd4;
     }
     .user-logo{
         font-size: 45px;

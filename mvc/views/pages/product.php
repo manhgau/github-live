@@ -102,6 +102,10 @@
     .evaluate{
         padding-top: 50px;
     }
+    .description-note {
+    padding: 20px;
+    margin-top: 10px;
+}
 
 </style>
     <div class="product-wrap">
@@ -163,7 +167,9 @@
             <div class="description-wrap">
                 <div class="description">
                     <h4 class="description-header">Mô tả sản phẩm:</h4>
-                    <span><?php echo $cat['prd_name']; ?></span>   
+                    <div class="description-note">
+                        <span ><?php echo $cat['description']; ?></span>   
+                    </div>
                 </div>
             </div>
             <div class="product-involve">

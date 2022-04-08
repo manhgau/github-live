@@ -16,9 +16,10 @@
             $categories = $AdminModel->getCategories();
             if(isset($_POST) && count($_POST) > 0) {                
                 $prd_name =$_POST['prd_name']??'';
-                $price =$_POST['price']??'';
                 $price_old =$_POST['price_old']??'';
+                $discount =$_POST['discount']??'';
                 $image =$_FILES['image']['name'];
+                $price = $price_old - ($price_old * ($discount/100));
                 $img_tmp =$_FILES['image']['tmp_name']??'';
                 $file_save = UPLOAD_DIR."/product/".$image;
                 move_uploaded_file($img_tmp, $file_save); 
@@ -39,7 +40,7 @@
             }else if($sold==""){
                 $error = "Vui lòng nhập số lượng sản phẩm đã bán";
             }else{
-                $result = $AdminModel -> Them($image, $prd_name, $price, $price_old, $quantity, $description, $sold, $category_id, $hot);
+                $result = $AdminModel -> Them($image, $prd_name, $price, $price_old, $discount, $quantity, $description, $sold, $category_id, $hot);
                 if($result){
                     redirect(build_layout_url('productadmin/danhsach'));        
                 }else{

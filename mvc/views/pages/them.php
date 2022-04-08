@@ -63,11 +63,11 @@
                 </div>
                 <div class="form_group">
                     <label for="">Giá sản phẩm</label>
-                    <input type="number" name="price"  class="form_control" require >
+                    <input type="number" name="price_old"  class="form_control" require >
                 </div>
                 <div class="form_group">
-                    <label for="">Giá cũ của sản phẩm</label>
-                    <input type="number" name="price_old"  class="form_control" require >
+                    <label for="">Giám giá</label>
+                    <input type="number" name="discount"  class="form_control" require >
                 </div>
                 <div class="form_group">
                     <label for="">Số lượng sản phẩm</label>

@@ -2,15 +2,13 @@
             <div class="gird">
                 <div class="gird__row">
                     <div class="container-header">
-                    <a class="form-link" href="<?php echo build_layout_url("home/new_product"); ?>">
-                    <h3 class="container-heading">Sản phẩm mới </h3>
-                    </a>
+                        <h3 class="container-heading">Sản phẩm mới </h3>
                     </div>
                     <div class="gird">
                         <div class="gird__row">
-                        <?php
-    if(isset($new_product) && is_array($new_product) && count($new_product) > 0){
-        foreach($new_product as $cat){    ?>                                                   
+                                <?php
+                if(isset($new_product) && is_array($new_product) && count($new_product) > 0){
+                foreach($new_product as $cat){    ?>                                                   
                         <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
                 <div class="gird__column-4">
                     
@@ -26,6 +24,24 @@
 
                                     </a>
                                 </button>
+                                <?php
+                                    if ( $cat['hot'] == 1 ){ ?>
+                                        <div class="product-hot">
+                                            <i class="fas fa-check"></i>
+                                            HOT
+                                    </div>
+
+                                <?php }else{
+                                    }?>
+                                <?php
+                                    if ( $cat['discount'] > 0 ){ ?>
+                                        <div class="product-sale">
+                                            <span class="product-sale-number"><?php echo $cat['discount']; ?>%</span>
+                                            <span class="product-sale-label">GIẢM</span>
+                                        </div>
+
+                                <?php }else{
+                                    }?>
                             </div>
                     
                  </div>

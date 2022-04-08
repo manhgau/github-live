@@ -1,17 +1,16 @@
-
-    <div class="gird">
+<div class="gird">
         <div class="gird__row">
             <div class="container-header">
-                <h3 class="container-heading">Sản phẩm nổi bật </h3>
+                <h3 class="container-heading">Sản phẩm bán chạy </h3>
             </div>
         <div class="gird">
             <div class="gird__row">
         <?php
-        if(isset($featured_products) && is_array($featured_products) && count($featured_products) > 0){
-        foreach($featured_products as $cat){                                                  
+        if(isset($selling_products) && is_array($selling_products) && count($selling_products) > 0){
+        foreach($selling_products as $cat){                                                  
                         ?>
                         <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
-                    <div class="gird__column-4">
+                    <div class="gird__column-5">
                             <div class="container-product">
                                 <img src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="" class="container-img">
                                 <h4 class="container-product-heading"><?php echo $cat['prd_name']; ?></h4>
@@ -23,24 +22,6 @@
                                         <span class="cart-note">THÊM VÀO GIỎ</span>
                                     </a>
                                 </button>
-                                <?php
-                                    if ( $cat['hot'] == 1 ){ ?>
-                                        <div class="product-hot">
-                                            <i class="fas fa-check"></i>
-                                            HOT
-                                    </div>
-
-                                <?php }else{
-                                    }?>
-                                <?php
-                                    if ( $cat['discount'] > 0 ){ ?>
-                                        <div class="product-sale">
-                                            <span class="product-sale-number"><?php echo $cat['discount']; ?>%</span>
-                                            <span class="product-sale-label">GIẢM</span>
-                                        </div>
-
-                                <?php }else{
-                                    }?>
                             </div>
                     </div>
                             </a>

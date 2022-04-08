@@ -11,6 +11,26 @@ class ProductModel extends db {
         }                                          
         return  $products;
     }
+    public function highToLow ($offset=0, $limit=5){    
+        $products = [];   //array();
+        $sql_new = "SELECT * FROM products  ORDER BY `price` ASC LIMIT $offset, $limit";
+        $query_new = mysqli_query($this->con, $sql_new);
+
+        while($row_new = mysqli_fetch_array($query_new)) {       
+            $products[] = $row_new;
+        }                                          
+        return  $products;
+    }
+    public function lowToHigh ($offset=0, $limit=5){    
+        $products = [];   //array();
+        $sql_new = "SELECT * FROM products  ORDER BY `price` DESC LIMIT $offset, $limit";
+        $query_new = mysqli_query($this->con, $sql_new);
+
+        while($row_new = mysqli_fetch_array($query_new)) {       
+            $products[] = $row_new;
+        }                                          
+        return  $products;
+    }
 
     public function getAllProducts($offset=0, $limit=5){            
         $products = [];
@@ -56,6 +76,17 @@ class ProductModel extends db {
         }                                              
         return  $products;
     }
+    public function getSellingProducts($offset=0, $limit=5){    
+        $products = [];   //array();
+        $sql_new = "SELECT * FROM products  ORDER BY `sold` DESC LIMIT $offset, $limit";
+        $query_new = mysqli_query($this->con, $sql_new);
+
+        while($row_new = mysqli_fetch_array($query_new)) {       
+            $products[] = $row_new;
+        }                                          
+        return  $products;
+    }
+
     public function getProducts(){
         $products = [];   //array();
         $id= $_GET['id'];

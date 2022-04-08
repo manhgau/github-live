@@ -136,11 +136,13 @@
                         <th>Tên sản phẩm</th>
                         <th>Giá sản phẩm</th>
                         <th>Giá cũ sản phẩm</th>
+                        <th>Giarm giá</th>
                         <th>Số lượng sản phẩm</th>
                         <th>Mô tả</th>
                         <th>Số lượng đã bán</th>
                         <th>Loại sản phẩm</th>
                         <th>Sản phẩm nổi bật</th>
+                        <th>Thêm</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
                     </tr>
@@ -158,8 +160,9 @@
                                     <img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="">
                                 </td>
                                 <td><?php echo $cat['prd_name']; ?></td>
-                                <td><?php echo $cat['price']; ?></td>
-                                <td><?php echo $cat['price_old']; ?></td>
+                                <td><?php echo number_format($cat['price'], 0, ',', ' '); ?> ₫</td>
+                                <td><?php echo number_format($cat['price_old'], 0, ',', ' '); ?> ₫</td>
+                                <td><?php echo $cat['discount']; ?></td>
                                 <td><?php echo $cat['quantity']; ?></td>
                                 <td><?php echo $cat['description']; ?></td>
                                 <td><?php echo $cat['sold']; ?></td>
@@ -174,6 +177,9 @@
                                     ?>
                                 </td>
                                 <td>
+                                    <a class="link link-more" href="<?php echo build_layout_url("productadmin/them")?>">Thêm</a>
+                                </td>
+                                <td>
                                     <a class="link" href="<?php echo build_layout_url("productadmin/sua")."&id=".$cat['id']."";?>">Sửa</a>
                                 </td>
                                 <td>
@@ -185,9 +191,6 @@
                             ?>
                 </tbody>
            </table>
-           <div class="btn-wrap">
-               <a class="link link-more" href="<?php echo build_layout_url("productadmin/them", true);?>">Thêm mới</a>
-           </div>
         </div>
     </div>
 </div>
