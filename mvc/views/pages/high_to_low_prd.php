@@ -7,12 +7,15 @@
                     <div class="gird__row">
                         <?php            
                             if(isset($high_to_low_prd) && is_array($high_to_low_prd) && count($high_to_low_prd) > 0){
-                                foreach($high_to_low_prd as $cat){  
+                                foreach($high_to_low_prd as $product){  
                                     ?>
-                                <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
+                                <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$product['id'].""; ?>">
 
                                             <div class="gird__column-5">
-                                                
+                                            <?php
+                                                $print_product_item = print_product_item($product);
+                                                echo $print_product_item;
+                                            ?> 
                                             </div>
                                         </a>
                         <?php   }
@@ -22,3 +25,9 @@
                 </div>    
         </div>
      </div>
+     <div class="page-wrap">
+        <?php
+            $pagination = pagiantion($page, $limit, $total_page, $base_url);
+            echo $pagination;
+        ?>
+     </div>  

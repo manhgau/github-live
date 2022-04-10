@@ -160,8 +160,8 @@
                                     <img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="">
                                 </td>
                                 <td><?php echo $cat['prd_name']; ?></td>
-                                <td><?php echo number_format($cat['price'], 0, ',', ' '); ?> ₫</td>
-                                <td><?php echo number_format($cat['price_old'], 0, ',', ' '); ?> ₫</td>
+                                <td><?php echo number_format($cat['price'], 0, ',', '.'); ?> ₫</td>
+                                <td><?php echo number_format($cat['price_old'], 0, ',', '.'); ?> ₫</td>
                                 <td><?php echo $cat['discount']; ?></td>
                                 <td><?php echo $cat['quantity']; ?></td>
                                 <td><?php echo $cat['description']; ?></td>

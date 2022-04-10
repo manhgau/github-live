@@ -2,7 +2,7 @@
 <?php require_once "./mvc/views/pages/slider.php" ?>
 <?php require_once "./mvc/views/pages/option.php" ?>
 <div class="container">
-<?php require_once "./mvc/views/pages/all_products.php" ?>
+<?php require_once "./mvc/views/pages/home_all_products.php" ?>
 <div class="btn-wrap">
      <a class="form-link" href="<?php echo build_layout_url("home/all_products"); ?>">
           <buttom class="btn-extend">Xem tất cả</buttom>

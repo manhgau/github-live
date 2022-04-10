@@ -137,7 +137,7 @@
                         <th>Ảnh sản phẩm</th>                       
                         <th>Tên sản phẩm</th>
                         <th>Số lượng mua</th>
-                        <th>Cập nhập</th>
+                        <!-- <th>Cập nhập</th> -->
                         <th>Đơn giá của sản phẩm</th>
                         <th>Thành tiền của sản phẩm</th>
                         <th>Action</th>
@@ -156,16 +156,14 @@
                     <tr>
                         <td><img style ="width:100px" src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt=""></td>                       
                         <td><?php echo $cat['prd_name']; ?></td>
-                        <form action="" method="post">
-                            <td>
-                                <input class="cart-number" type="number" name="number_cart" value="<?php echo $cat['number']; ?>">
-                            </td>
-                            <td>
-                                <input type="submit" value="Cập nhập">
-                            </td>
-                        </form>
-                        <td class="font-number"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</td>
-                        <td class="font-number"><?php echo number_format($money_paid, 0, ',', ' '); ?>₫</td>
+                        <td>
+                            <input class="cart-number" type="number" name="number_cart" value="<?php echo $cat['number']; ?>">
+                        </td>
+                        <!-- <td>
+                            <input type="submit" value="Cập nhập">
+                        </td> -->
+                        <td class="font-number"><?php echo number_format($cat['price'], 0, ',', '.'); ?>₫</td>
+                        <td class="font-number"><?php echo number_format($money_paid, 0, ',', '.'); ?>₫</td>
                         <td><a onclick ="return Del ('<?php echo $cat['prd_name']; ?>')" class="link link-color" href="<?php echo build_layout_url("home/delete_cart_prd")."&id=".$cat['id']."";; ?>"><i class="far fa-trash-alt"></i></a></td>
                     </tr>                            
                     <?php }  
@@ -183,7 +181,7 @@
 <div class="payment">
     <div class="money-payment">
         <label class = "label">Tổng tiền:</label>
-        <span class = "payment-number"><?php echo number_format($sumtotal, 0, ',', ' '); ?>₫</span>
+        <span class = "payment-number"><?php echo number_format($sumtotal, 0, ',', '.'); ?>₫</span>
     </div>
     <a class ="link-payment" href="
     <?php

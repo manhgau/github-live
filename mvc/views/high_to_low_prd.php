@@ -2,5 +2,4 @@
 <?php require_once "./mvc/views/pages/menu_prd.php" ?>
 <div class="container">
 <?php require_once "./mvc/views/pages/high_to_low_prd.php" ?>
-<?php require_once "./mvc/views/pages/paging.php" ?>
 </div>

@@ -7,22 +7,14 @@
             <div class="gird__row">
         <?php
         if(isset($selling_products) && is_array($selling_products) && count($selling_products) > 0){
-        foreach($selling_products as $cat){                                                  
+        foreach($selling_products as $product){                                                  
                         ?>
                         <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
                     <div class="gird__column-5">
-                            <div class="container-product">
-                                <img src="<?php echo DOMAIN;?>/public/upload/product/<?php echo $cat['img']; ?>" alt="" class="container-img">
-                                <h4 class="container-product-heading"><?php echo $cat['prd_name']; ?></h4>
-                                <span class="price"><?php echo number_format($cat['price'], 0, ',', ' '); ?> ₫</span>
-                                <span class="price-old"><?php echo number_format($cat['price_old'], 0, ',', ' '); ?> ₫</span>
-                                <button class="cart-product" onclick="addCart('<?php echo $cat['id']; ?>')" >
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <a class="form-link" href="">
-                                        <span class="cart-note">THÊM VÀO GIỎ</span>
-                                    </a>
-                                </button>
-                            </div>
+                    <?php
+                        $print_product_item = print_product_item($product);
+                        echo $print_product_item;
+                    ?> 
                     </div>
                             </a>
                         <?php }
@@ -32,3 +24,9 @@
         </div>    
      </div>
 </div>
+<div class="page-wrap">
+        <?php
+            $pagination = pagiantion($page, $limit, $total_page, $base_url);
+            echo $pagination;
+        ?>
+</div>  

@@ -36,6 +36,22 @@ class home extends controller{
         ]);
 
     }
+    function home_all_products(){    
+        //Tin tức
+        $NewsCategoryModel = $this->model("NewsCategoryModel");
+        $news_categories = $NewsCategoryModel->getCategories();  
+        // danh mục sản phẩm
+        $ProductCatModel = $this->model("CategoryModel");
+        $product_categories = $ProductCatModel->getCategories();         
+
+        $ProductModel = $this->model("ProductModel");                 
+        $all_products = $ProductModel->getAllProducts();                 
+        $this->view("home_all_products",[
+            'all_products'          => $all_products,
+            'news_categories'       =>  $news_categories,
+            'product_categories'    =>  $product_categories,
+        ]);
+    }
     function all_products(){    
         //Tin tức
         $NewsCategoryModel = $this->model("NewsCategoryModel");
@@ -44,7 +60,7 @@ class home extends controller{
         $ProductCatModel = $this->model("CategoryModel");
         $product_categories = $ProductCatModel->getCategories();         
         // Phân trang
-        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 10;
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 8;
         $limit = max(1, $limit);
 
         $page = !empty($_GET['page']) ? $_GET['page'] : 1;
@@ -72,24 +88,27 @@ class home extends controller{
         // danh mục sản phẩm
         $ProductCatModel = $this->model("CategoryModel");
         $product_categories = $ProductCatModel->getCategories(); 
-        // danh sách sản phẩm mới
-        $ProductModel = $this->model("ProductModel");
-        $new_product = $ProductModel->getNewProducts();    
         // Phân trang
-        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
-        $item_perz_page = max(1, $item_perz_page);
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 8;
+        $limit = max(1, $limit);
 
-        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
-        $current_page = max(1, $current_page); 
+        $page = !empty($_GET['page']) ? $_GET['page'] : 1;
+        $page = max(1, $page); 
+        $offset = ($page - 1) * $limit;
+
+        // danh sách sản phẩm mới
+        $ProductModel = $this->model("ProductModel");                
         $total_products = $ProductModel->countProducts();  
-        $total_page = ceil ($total_products / $item_perz_page);       
+        $new_product = $ProductModel->getNewProducts($offset, $limit);  
+        $total_page = ceil ($total_products / $limit);        
         $this->view("new_product",[
             'new_product'         => $new_product,
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
-            'total_page'            => $total_page,
-            'item_perz_page'        => $item_perz_page,
-            'current_page'          => $current_page
+            'total_page'            =>  $total_page,
+            'limit'                 =>  $limit,
+            'page'                  =>  $page,
+            'base_url'              =>  build_layout_url("home/new_product")
         ]);
     }
 
@@ -101,24 +120,26 @@ class home extends controller{
         // danh mục sản phẩm
         $ProductCatModel = $this->model("CategoryModel");
         $product_categories = $ProductCatModel->getCategories(); 
-        // SẢN PHÂM NỔI BẬT
-        $ProductModel = $this->model("ProductModel");
-        $featured_products = $ProductModel->getFeatureProducts();
         // Phân trang
-        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
-        $item_perz_page = max(1, $item_perz_page);
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 8;
+        $limit = max(1, $limit);
 
-        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
-        $current_page = max(1, $current_page); 
+        $page = !empty($_GET['page']) ? $_GET['page'] : 1;
+        $page = max(1, $page); 
+        $offset = ($page - 1) * $limit;
+        $ProductModel = $this->model("ProductModel");                
         $total_products = $ProductModel->countProducts();  
-        $total_page = ceil ($total_products / $item_perz_page);   
+        $featured_products = $ProductModel->getFeatureProducts($offset, $limit);  
+        $total_page = ceil ($total_products / $limit);    
         $this->view("featured_products", [
             'featured_products'     => $featured_products,
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
-            'total_page'            => $total_page,
-            'item_perz_page'        => $item_perz_page,
-            'current_page'          => $current_page
+            'total_page'            =>  $total_page,
+            'limit'                 =>  $limit,
+            'page'                  =>  $page,
+            'base_url'              =>  build_layout_url("home/new_product")
+            
         ]);
 
     }
@@ -133,20 +154,24 @@ class home extends controller{
         $ProductModel = $this->model("ProductModel");
         $high_to_low_prd = $ProductModel->highToLow();
         // Phân trang
-        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
-        $item_perz_page = max(1, $item_perz_page);
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 10;
+        $limit = max(1, $limit);
 
-        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
-        $current_page = max(1, $current_page); 
+        $page = !empty($_GET['page']) ? $_GET['page'] : 1;
+        $page = max(1, $page); 
+        $offset = ($page - 1) * $limit;
+        $ProductModel = $this->model("ProductModel");                
         $total_products = $ProductModel->countProducts();  
-        $total_page = ceil ($total_products / $item_perz_page);   
+        $high_to_low_prd = $ProductModel->highToLow($offset, $limit);  
+        $total_page = ceil ($total_products / $limit);    
         $this->view("high_to_low_prd", [
             'high_to_low_prd'     => $high_to_low_prd,
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
-            'total_page'            => $total_page,
-            'item_perz_page'        => $item_perz_page,
-            'current_page'          => $current_page
+            'total_page'            =>  $total_page,
+            'limit'                 =>  $limit,
+            'page'                  =>  $page,
+            'base_url'              =>  build_layout_url("home/high_to_low_prd")
         ]);
 
     }
@@ -157,24 +182,25 @@ class home extends controller{
         // danh mục sản phẩm
         $ProductCatModel = $this->model("CategoryModel");
         $product_categories = $ProductCatModel->getCategories(); 
-        // SẢN PHÂM NỔI BẬT
-        $ProductModel = $this->model("ProductModel");
-        $low_to_high_prd = $ProductModel->lowToHigh();
         // Phân trang
-        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
-        $item_perz_page = max(1, $item_perz_page);
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 10;
+        $limit = max(1, $limit);
 
-        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
-        $current_page = max(1, $current_page); 
+        $page = !empty($_GET['page']) ? $_GET['page'] : 1;
+        $page = max(1, $page); 
+        $offset = ($page - 1) * $limit;
+        $ProductModel = $this->model("ProductModel");                
         $total_products = $ProductModel->countProducts();  
-        $total_page = ceil ($total_products / $item_perz_page);   
+        $low_to_high_prd = $ProductModel->lowToHigh($offset, $limit);  
+        $total_page = ceil ($total_products / $limit);    
         $this->view("low_to_high_prd", [
             'low_to_high_prd'     => $low_to_high_prd,
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
-            'total_page'            => $total_page,
-            'item_perz_page'        => $item_perz_page,
-            'current_page'          => $current_page
+            'total_page'            =>  $total_page,
+            'limit'                 =>  $limit,
+            'page'                  =>  $page,
+            'base_url'              =>  build_layout_url("home/low_to_high_prd")
         ]);
 
     }
@@ -185,24 +211,25 @@ class home extends controller{
         // danh mục sản phẩm
         $ProductCatModel = $this->model("CategoryModel");
         $product_categories = $ProductCatModel->getCategories(); 
-        // SẢN PHÂM NỔI BẬT
-        $ProductModel = $this->model("ProductModel");
-        $selling_products = $ProductModel->getSellingProducts();
         // Phân trang
-        $item_perz_page =!empty($_GET['per_page_all']) ? $_GET['per_page_all'] : 5;
-        $item_perz_page = max(1, $item_perz_page);
+        $limit =!empty($_GET['limit']) ? $_GET['limit'] : 10;
+        $limit = max(1, $limit);
 
-        $current_page = !empty($_GET['page_all']) ? $_GET['page_all'] : 1;
-        $current_page = max(1, $current_page); 
+        $page = !empty($_GET['page']) ? $_GET['page'] : 1;
+        $page = max(1, $page); 
+        $offset = ($page - 1) * $limit;
+        $ProductModel = $this->model("ProductModel");                
         $total_products = $ProductModel->countProducts();  
-        $total_page = ceil ($total_products / $item_perz_page);   
+        $selling_products = $ProductModel->getSellingProducts($offset, $limit);  
+        $total_page = ceil ($total_products / $limit);    
         $this->view("selling_products", [
             'selling_products'     => $selling_products,
             'news_categories'       =>  $news_categories,
             'product_categories'    =>  $product_categories,
-            'total_page'            => $total_page,
-            'item_perz_page'        => $item_perz_page,
-            'current_page'          => $current_page
+            'total_page'            =>  $total_page,
+            'limit'                 =>  $limit,
+            'page'                  =>  $page,
+            'base_url'              =>  build_layout_url("home/selling_products")
         ]);
 
     }
@@ -336,11 +363,11 @@ class home extends controller{
     }
     public function delete_cart_prd (){
         $id = $_GET['id'];
-        var_dump($id);
-        die();
+        // var_dump($id);
+        // die();
         if (isset($_GET['id'])){
-            if(isset($_SESSION['cart'])){
-                unset($_SESSION['cart']);            
+            if(isset($_SESSION['cart'][$id])){
+                unset($_SESSION['cart'][$id]);            
             } 
         }
     redirect(build_layout_url("home/cart"));

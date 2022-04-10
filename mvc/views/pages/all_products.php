@@ -10,9 +10,9 @@
                             if(isset($all_products) && is_array($all_products) && count($all_products) > 0){
                                 foreach($all_products as $product){  
                                     ?>
-                                <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$cat['id'].""; ?>">
+                                <a class="form-link" href="<?php echo build_layout_url("home/product")."&id=".$product['id'].""; ?>">
 
-                                            <div class="gird__column-5">
+                                            <div class="gird__column-4">
                                             <?php
                                                 $print_product_item = print_product_item($product);
                                                 echo $print_product_item;

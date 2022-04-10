@@ -109,7 +109,7 @@
                                                             </div> -->
                                                             </div>
                                                             <div class="cart-pro-item--price">
-                                                                <span><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</span>
+                                                                <span><?php echo number_format($cat['price'], 0, ',', '.'); ?>₫</span>
                                                             </div>
                                                         </div>
 

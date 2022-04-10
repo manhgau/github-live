@@ -84,14 +84,16 @@ function print_product_item($product=[]){
     $html = '<div class="container-product">';
     $html.= '<img src="'. DOMAIN.'/public/upload/product/'.$product['img'].'" alt="" class="container-img">';
     $html.= '<h4 class="container-product-heading">'.$product['prd_name'].'</h4>';
+    $html.= '<div class="price-wrap">';
     $html.= '<span class="price">'.number_format($product['price'], 0, ',', '.').' ₫</span>';
     if ( $product['discount'] > 0 ){
     $html.= '<span class="price-old">'.number_format($product['price_old'], 0, ',', '.').' ₫</span>';
     }else{
     }
+    $html.= '</div>';
     $html.= '<button class="cart-product" onclick="addCart('.$product['id'].')" >';
-    $html.= '<i class="fas fa-shopping-cart"></i>';
     $html.= '<a class="form-link" href="">';
+    $html.= '<i class="fas fa-shopping-cart"></i>';
     $html.= '<span class="cart-note">THÊM VÀO GIỎ</span>';
     $html.=  '</a>';
     $html.= '</button>';

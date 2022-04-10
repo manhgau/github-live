@@ -73,7 +73,7 @@
                     <span class="pro-item-number"><?php echo $cat['number']; ?></span>
                 </div>
                 <div class="pro-item-name"><?php echo $cat['prd_name']; ?></div>
-                <div class="pro-item-price"><?php echo number_format($cat['price'], 0, ',', ' '); ?>₫</div>
+                <div class="pro-item-price"><?php echo number_format($cat['price'], 0, ',', '.'); ?>₫</div>
             </div>
             <?php }
                     }
@@ -84,15 +84,15 @@
             <div class="pro-list-footer">
                 <div class="footer-item">
                     <label class="footer-heading" for="">Tạm tính:</label>
-                    <span class="footer-number"><?php echo number_format($sumtotal, 0, ',', ' '); ?>₫</span>
+                    <span class="footer-number"><?php echo number_format($sumtotal, 0, ',', '.'); ?>₫</span>
                 </div>
                 <div class="footer-item">
                     <label class="footer-heading" for="">Phí vận chuyển:</label>
-                    <span class="footer-number"><?php echo number_format($ship, 0, ',', ' '); ?>₫</span>                  
+                    <span class="footer-number"><?php echo number_format($ship, 0, ',', '.'); ?>₫</span>                  
                 </div>
                 <div class="footer-item">
                     <label class="footer-heading" for="">Thành tiền:</label>
-                    <span class="footer-number"><?php echo number_format( $sum, 0, ',', ' '); ?>₫</span>                 
+                    <span class="footer-number"><?php echo number_format( $sum, 0, ',', '.'); ?>₫</span>                 
                 </div>
             </div>
         </div>
