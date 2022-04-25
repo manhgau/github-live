@@ -5,7 +5,7 @@
 class home extends controller{
 
     // Must have SayHi()
-    public function allproducts(){               
+    public function allproducts(){                               
         //danh sách tin tức
         $NewsCategoryModel = $this->model("NewsCategoryModel");
         $news_categories = $NewsCategoryModel->getCategories();   

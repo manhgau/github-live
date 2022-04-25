@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2022 at 02:02 PM
+-- Generation Time: Apr 25, 2022 at 04:54 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -88,7 +88,9 @@ CREATE TABLE `order` (
 INSERT INTO `order` (`id`, `name`, `email`, `user_id`, `phone`, `soluong`, `tongtien`, `diachi`, `id_payment`, `created_at`) VALUES
 (41, 'Nguyễn Văn Thuận', 'thuan123@gmail.com', 45, 329322538, 3, 2712000, 'Mỹ Đình/Hà Nội', 1, 1649408165),
 (42, 'Nguyễn Văn Thuận', 'thuan123@gmail.com', 45, 329322538, 12, 11856960, 'Mỹ Đình/Hà Nội', 1, 1649471819),
-(43, 'Nguyễn Văn Thuận', 'thuan123@gmail.com', 45, 329322538, 3, 1068600, 'Mỹ Đình/Hà Nội', 1, 1649472311);
+(43, 'Nguyễn Văn Thuận', 'thuan123@gmail.com', 45, 329322538, 3, 1068600, 'Mỹ Đình/Hà Nội', 1, 1649472311),
+(44, 'Nguyễn Quang Minh', 'minh@gmail.com', 46, 985843755, 3, 921760, 'Phú đô', 1, 1649608400),
+(45, 'Nguyễn Quang Minh', 'minh@gmail.com', 46, 985843755, 2, 1209760, 'Mỹ Đình/Hà Nội', 1, 1649608447);
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,12 @@ INSERT INTO `order_item` (`id`, `prd_img`, `order_id`, `prd_id`, `prd_name`, `so
 (48, 'f1107ddbfd3bdb6b5e22d4720797013e.jpg', 42, 36, 'Thực phẩm bảo vệ sức khỏe giúp da sáng đẹp và dạ dày khỏe Rohto Blossomy lốc 03 chai x 50ml', 1, 150000),
 (49, '85cfa4140007478f87afcc9065352c58.jpg', 43, 34, 'Tinh dầu hoa anh thảo Evening Primrose Oil Blackmores Úc 190 viên, hỗ trợ cân bằng nội tiết tố, làm đẹp da, tóc, móng', 1, 600000),
 (50, 'fb611733af51913003bb116d603acefa.jpg', 43, 40, 'Viên uống bổ não Healthy Care Ginkgo Biloba 100 viên', 1, 306600),
-(51, '6f8abca13f7c727b98482011ec3ad625.jpg', 43, 37, 'Thực phẩm bảo vệ sức khỏe giúp da sáng đẹp và dạ dày khỏe Rohto Blossomy lốc 03 chai x 50ml', 1, 162000);
+(51, '6f8abca13f7c727b98482011ec3ad625.jpg', 43, 37, 'Thực phẩm bảo vệ sức khỏe giúp da sáng đẹp và dạ dày khỏe Rohto Blossomy lốc 03 chai x 50ml', 1, 162000),
+(52, 'e8be3c8494cd5b62a3f3d0e4b735b8eb.jpg', 44, 35, 'Tinh dầu hoa anh thảo Blackmores 190 viên đẹp da, chống lão hóa, cải thiện nội tiết tố nữ', 1, 609760),
+(53, 'f1107ddbfd3bdb6b5e22d4720797013e.jpg', 44, 36, 'Thực phẩm bảo vệ sức khỏe giúp da sáng đẹp và dạ dày khỏe Rohto Blossomy lốc 03 chai x 50ml', 1, 150000),
+(54, '6f8abca13f7c727b98482011ec3ad625.jpg', 44, 37, 'Thực phẩm bảo vệ sức khỏe giúp da sáng đẹp và dạ dày khỏe Rohto Blossomy lốc 03 chai x 50ml', 1, 162000),
+(55, '85cfa4140007478f87afcc9065352c58.jpg', 45, 34, 'Tinh dầu hoa anh thảo Evening Primrose Oil Blackmores Úc 190 viên, hỗ trợ cân bằng nội tiết tố, làm đẹp da, tóc, móng', 1, 600000),
+(56, 'e8be3c8494cd5b62a3f3d0e4b735b8eb.jpg', 45, 35, 'Tinh dầu hoa anh thảo Blackmores 190 viên đẹp da, chống lão hóa, cải thiện nội tiết tố nữ', 1, 609760);
 
 -- --------------------------------------------------------
 
@@ -254,7 +261,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `phone`, `addres`, `ad_id`) VALUES
 (44, 'Nguyễn Bá Mạnh', 'manh123@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 329322538, 'Mỹ Đình/Hà Nội', 1),
-(45, 'Nguyễn Văn Thuận', 'thuan123@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 329322538, 'Mỹ Đình/Hà Nội', 2);
+(45, 'Nguyễn Văn Thuận', 'thuan123@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 329322538, 'Mỹ Đình/Hà Nội', 2),
+(46, 'Nguyễn Quang Minh', 'minh@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 985843755, 'Mỹ Đình/Hà Nội', 2);
 
 --
 -- Indexes for dumped tables
@@ -329,13 +337,13 @@ ALTER TABLE `category_new`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `partner`
@@ -347,7 +355,7 @@ ALTER TABLE `partner`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -359,7 +367,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Constraints for dumped tables
